@@ -1,0 +1,63 @@
+import streamlit as st
+import pandas as pd
+from datetime import datetime
+from PIL import Image
+import os
+
+# --- 設定資料庫檔名 ---
+DB_FILE = 'inventory.xlsx'
+
+# --- 初始化資料庫 ---
+if not os.path.exists(DB_FILE):
+    df = pd.DataFrame(columns=['時間', '產品照片', '類別', '等級', '重量/數量', '備註'])
+    df.to_excel(DB_FILE, index=False)
+
+st.title("📦 批發商進貨挑選系統")
+
+# 1. 拍照功能
+img_file = st.camera_input("請拍攝產品照片或貨單")
+
+# 2. 輸入欄位 (針對「挑選」設計)
+col1, col2 = st.columns(2)
+
+with col1:
+    category = st.selectbox("產品類別", ["生鮮", "五金", "布料", "其他"])
+    level = st.radio("挑選等級", ["特級", "優等", "一般", "瑕疵"])
+
+with col2:
+    amount = st.number_input("輸入重量/數量", min_value=0.0)
+    note = st.text_input("備註 (例如：供應商名稱)")
+
+# 3. 儲存邏輯
+if st.button("確認入庫並存檔"):
+    if img_file is not None:
+        # 儲存照片
+        img = Image.open(img_file)
+        img_path = f"images/{datetime.now().strftime('%Y%m%d%H%M%S')}.jpg"
+        if not os.path.exists('images'): os.makedirs('images')
+        img.save(img_path)
+        
+        # 整理資料
+        new_data = {
+            '時間': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            '產品照片': img_path,
+            '類別': category,
+            '等級': level,
+            '重量/數量': amount,
+            '備註': note
+        }
+        
+        # 寫入 Excel
+        df = pd.read_excel(DB_FILE)
+        df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
+        df.to_excel(DB_FILE, index=False)
+        
+        st.success(f"✅ 入庫成功！已存入資料庫。等級：{level}")
+    else:
+        st.error("請先拍攝照片才能存檔喔！")
+
+# 4. 顯示最近 5 筆紀錄
+st.write("---")
+st.subheader("最近入庫紀錄")
+df_display = pd.read_excel(DB_FILE)
+st.dataframe(df_display.tail(5))

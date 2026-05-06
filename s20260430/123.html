@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>宏恩眼鏡 - 產品選購與排序</title>
+    <style>
+        :root { --brand-blue: #004a99; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
+        .filter-panel { 
+            background: white; padding: 20px; border-radius: 12px; 
+            margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex; flex-wrap: wrap; gap: 20px; align-items: center;
+        }
+        .product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .glass-card { 
+            background: white; padding: 20px; border-radius: 12px; 
+            text-align: center; border: 1px solid #eee; transition: 0.3s;
+        }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .price { font-size: 20px; color: var(--brand-blue); font-weight: bold; margin: 10px 0; }
+        select { padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; }
+        .badge { background: #eee; padding: 3px 8px; border-radius: 4px; font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <h2 style="color: var(--brand-blue);">🕶️ 專業眼鏡館</h2>
+
+    <div class="filter-panel">
+        <div>
+            <label>顏色：</label>
+            <select id="colorFilter" onchange="renderProducts()">
+                <option value="all">全部顏色</option>
+                <option value="black">黑色</option>
+                <option value="gold">金色</option>
+                <option value="red">紅色</option>
+            </select>
+        </div>
+
+        <div>
+            <label>形狀：</label>
+            <select id="shapeFilter" onchange="renderProducts()">
+                <option value="all">全部形狀</option>
+                <option value="square">方框</option>
+                <option value="round">圓框</option>
+            </select>
+        </div>
+
+        <div style="margin-left: auto;">
+            <label>排序方式：</label>
+            <select id="sortOrder" onchange="renderProducts()">
+                <option value="default">預設排序</option>
+                <option value="lowToHigh">價格：低到高</option>
+                <option value="highToLow">價格：高到低</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="productList" class="product-list"></div>
+
+<script>
+    // 擴充後的產品資料
+    const myGlasses = [
+        { name: "經典黑方框", color: "black", shape: "square", price: 2980 },
+        { name: "文青圓金框", color: "gold", shape: "round", price: 3500 },
+        { name: "時尚紅圓框", color: "red", shape: "round", price: 2100 },
+        { name: "專業黑圓框", color: "black", shape: "round", price: 3200 },
+        { name: "典雅紅方框", color: "red", shape: "square", price: 4200 },
+        { name: "極簡金方框", color: "gold", shape: "square", price: 1800 }
+    ];
+
+    function renderProducts() {
+        const colorVal = document.getElementById('colorFilter').value;
+        const shapeVal = document.getElementById('shapeFilter').value;
+        const sortVal = document.getElementById('sortOrder').value;
+        const listDiv = document.getElementById('productList');
+        
+        listDiv.innerHTML = "";
+
+        // 1. 篩選 (Filter)
+        let filtered = myGlasses.filter(item => {
+            const matchColor = (colorVal === 'all' || item.color === colorVal);
+            const matchShape = (shapeVal === 'all' || item.shape === shapeVal);
+            return matchColor && matchShape;
+        });
+
+        // 2. 排序 (Sort) - 核心邏輯
+        if (sortVal === "lowToHigh") {
+            filtered.sort((a, b) => a.price - b.price); // 由小到大
+        } else if (sortVal === "highToLow") {
+            filtered.sort((a, b) => b.price - a.price); // 由大到小
+        }
+
+        // 3. 渲染 (Output)
+        if (filtered.length === 0) {
+            listDiv.innerHTML = "<p>找不到符合條件的產品。</p>";
+            return;
+        }
+
+        filtered.forEach(item => {
+            listDiv.innerHTML += `
+                <div class="glass-card">
+                    <div style="font-size:50px; margin-bottom:10px;">👓</div>
+                    <span class="badge">${item.shape === 'round' ? '圓框' : '方框'}</span>
+                    <h3>${item.name}</h3>
+                    <p class="price">NT$ ${item.price}</p>
+                    <button style="background:var(--brand-blue); color:white; border:none; padding:8px 20px; border-radius:5px; cursor:pointer;">
+                        查看詳情
+                    </button>
+                </div>
+            `;
+        });
+    }
+
+    renderProducts();
+</script>
+
+</body>
+</html>
