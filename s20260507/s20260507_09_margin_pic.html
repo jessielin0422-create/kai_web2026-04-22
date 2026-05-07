@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          .box {
+               width: 100px;
+               height: 100px;
+               object-fit: contain;
+          }
+
+          .box1 {
+               background-color: red;
+               margin-top: auto margin-bottom: 100px
+          }
+
+          .box2 {
+               background-color: green;
+               margin-left: 200px;
+
+          }
+
+          .box3 {
+               background-color: rgb(155, 10, 100);
+               margin-bottom: 100px;
+
+          }
+
+          /* margin 盒子外的距離調整(像防火巷) VS padding 盒子內的距離調整 */
+          /* margin-top ~ margin-right ~ margin-bottom ~ margin-right ~ margin-auto */
+          /* padding-top ~  padding-right ~  padding-bottom ~  padding-right ~  padding-auto */
+
+          .box4 {
+               background-color: rgb(215, 237, 21);
+               margin-left: 100px;
+               padding-bottom: 100px;
+
+          }
+
+          .box img {
+               width: 100%;
+               /* 寬度填滿盒子 */
+               height: 100%;
+               /* 高度填滿盒子 */
+
+               /* 最重要的一行：防止變形 */
+               object-fit: contain;
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="box box1"><img src="./s20260507img/b014.png" alt=""> </div>
+     <div class="box box2"><img src="./s20260507img/b014.png" alt=""></div>
+     <div class="box box3"><img src="./s20260507img/black017.png" alt=""></div>
+     <div class="box box4"><img src="./s20260507img/b014.png" alt=""></div>
+     <div class="box box3"><img src="./s20260507img/r011.png" alt=""></div>
+     <div class="box box2"><img src="./s20260507img/b014.png" alt=""></div>
+     <div class="box box1"><img src="./s20260507img/pink01.png" alt=""></div>
+
+
+</body>
+
+</html>
