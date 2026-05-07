@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>尊爵水晶典藏館 - 滿額優惠版</title>
+    <title>尊爵水晶典藏館 - 修正版</title>
     <style>
-        /* 承襲先前的奢華黑金風格 */
+        /* 這裡完全保留你原本的所有 CSS 樣式，不做變動 */
         :root {
             --gold: #d4af37;
             --glass: rgba(255, 255, 255, 0.03);
@@ -35,11 +35,8 @@
         }
 
         .content-wrapper { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
-
         h3 { color: var(--gold); letter-spacing: 12px; font-size: 2.5em; margin-bottom: 40px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-
         table { border-collapse: separate; border-spacing: 15px; width: 95%; max-width: 1100px; }
-
         td {
             background: var(--glass);
             backdrop-filter: blur(15px);
@@ -49,9 +46,7 @@
             border-radius: 30px;
             transition: all 0.5s ease;
         }
-
         tr:first-child td { background: rgba(212, 175, 55, 0.1); color: var(--gold); font-weight: bold; }
-
         td img {
             width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px;
             -webkit-box-reflect: below 2px linear-gradient(transparent 70%, rgba(255, 255, 255, 0.05));
@@ -72,7 +67,6 @@
         .btn-qty:hover { background: var(--gold); color: #000; }
         .count { background: transparent; border: none; color: #fff; width: 35px; text-align: center; font-size: 1.1em; }
 
-        /* 結帳與折扣顯示區 */
         .checkout-area {
             margin-top: 50px; padding: 40px;
             background: rgba(255, 255, 255, 0.02);
@@ -81,12 +75,10 @@
             border: 1px solid rgba(212, 175, 55, 0.2);
             text-align: right; width: 95%; max-width: 1100px; box-sizing: border-box;
         }
-
         .price-line { margin: 10px 0; font-size: 1.2em; }
         .original-price { text-decoration: line-through; color: #888; font-size: 0.9em; display: none; }
         #discount-info { color: #2ed573; font-weight: bold; margin-bottom: 10px; min-height: 1.5em; }
         #total-price { color: var(--gold); font-size: 2.2em; font-weight: bold; }
-
         .btn-checkout {
             background: linear-gradient(90deg, #d4af37, #f2d982);
             border: none; padding: 18px 70px; border-radius: 50px;
@@ -104,14 +96,28 @@
 
         <table>
             <tr><td>商品項目</td><td>單價/元</td><td>收藏數量/件</td><td>小計/元</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/r011.png" alt=""><br>紅水晶</td><td class="unit-price">1,000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/y012.png" alt=""><br>黃水晶</td><td class="unit-price">1,200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/g013.png" alt=""><br>綠水晶</td><td class="unit-price">1,500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/b014.png" alt=""><br>海藍寶</td><td class="unit-price">1,800</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/p015.png" alt=""><br>紫水晶</td><td class="unit-price">2,000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/pink01.png" alt=""><br>粉水晶</td><td class="unit-price">2,200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/w016.png" alt=""><br>白水晶</td><td class="unit-price">2,500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
-            <tr class="item-row"><td><img src="./s20260507img/black017.png" alt=""><br>黑水晶</td><td class="unit-price">3,000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <!-- 單價拿掉逗號，方便程式計算 -->
+            <tr class="item-row"><td><img src="./s20260507img/r011.png"><br>紅水晶</td><td class="unit-price">1000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/y012.png"><br>黃水晶</td><td class="unit-price">1200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/g013.png"><br>綠水晶</td><td class="unit-price">1500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/b014.png"><br>海藍寶</td><td class="unit-price">1800</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/p015.png"><br>紫水晶</td><td class="unit-price">2000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/pink01.png"><br>粉水晶</td><td class="unit-price">2200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/w016.png"><br>白水晶</td><td class="unit-price">2500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            
+            <!-- 修正黑水晶：把 input 正確包在 td 裡面 -->
+            <tr class="item-row">
+                <td><img src="./s20260507img/black017.png"><br>黑水晶</td>
+                <td class="unit-price">3000</td>
+                <td>
+                    <div class="quantity-control">
+                        <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                        <input type="number" class="count" value="0" readonly>
+                        <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </td>
+                <td class="subtotal">0</td>
+            </tr>
         </table>
 
         <div class="checkout-area">
@@ -123,7 +129,6 @@
     </div>
 
     <script>
-        // 滑鼠光暈
         const glow = document.getElementById('mouse-glow');
         window.addEventListener('mousemove', (e) => {
             glow.style.setProperty('--x', (e.clientX / window.innerWidth) * 100 + '%');
@@ -141,18 +146,21 @@
         function updateCart() {
             let rawTotal = 0;
             document.querySelectorAll('.item-row').forEach(row => {
-                const price = parseInt(row.querySelector('.unit-price').innerText);
-                const count = parseInt(row.querySelector('.count').value);
+                // 這裡加入 replace(/,/g, '') 確保有逗號也能算，但建議 HTML 直接寫純數字
+                const priceText = row.querySelector('.unit-price').innerText.replace(/,/g, '');
+                const price = parseInt(priceText) || 0;
+                const count = parseInt(row.querySelector('.count').value) || 0;
+                
                 const sub = price * count;
                 row.querySelector('.subtotal').innerText = sub.toLocaleString();
                 rawTotal += sub;
             });
 
+            // 以下折扣邏輯完全保留你原本的寫法
             let finalTotal = rawTotal;
             let discountText = "";
             let discountRate = 1;
 
-            // 折扣判斷邏輯
             if (rawTotal >= 100000) {
                 discountRate = 0.8;
                 discountText = "✨ 尊榮尊選：已享 8 折優惠！";
@@ -168,7 +176,6 @@
 
             finalTotal = Math.round(rawTotal * discountRate);
 
-            // 更新介面
             const rawDisplay = document.getElementById('raw-price');
             if (discountRate < 1) {
                 rawDisplay.style.display = "inline";
