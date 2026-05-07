@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的水晶購物車</title>
+</head>
+<body>
+
+    <h2>水晶購物清單</h2>
+
+    <!-- 用 border="1" 畫出基礎表格線條 -->
+    <table border="1">
+        <tr>
+            <td>圖片</td>
+            <td>產品名稱</td>
+            <td>單價</td>
+            <td>數量</td>
+            <td>小計</td>
+        </tr>
+
+        <!-- 商品開始：每一行 class 都要叫 item-row -->
+        <tr class="item-row">
+            <td><img src="./s20260507img/r011.png" width="80"></td>
+            <td>紅水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/y012.png" width="80"></td>
+            <td>黃水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/g013.png" width="80"></td>
+            <td>綠水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/b014.png" width="80"></td>
+            <td>藍水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/p015.png" width="80"></td>
+            <td>紫水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/pink01.png" width="80"></td>
+            <td>粉水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <tr class="item-row">
+            <td><img src="./s20260507img/w016.png" width="80"></td>
+            <td>白水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+
+        <!-- 這裡修正了你原本黑水晶的標籤錯誤 -->
+        <tr class="item-row">
+            <td><img src="./s20260507img/black017.png" width="80"></td>
+            <td>黑水晶</td>
+            <td>1000</td>
+            <td><input type="number" class="count" value="0" onchange="calculate()"></td>
+            <td class="subtotal">0</td>
+        </tr>
+    </table>
+
+    <hr>
+    <h3>總計：NT$ <span id="total-price">0</span> 元</h3>
+
+    <script>
+        // 這個函式會在數量改變時執行
+        function calculate() {
+            let total = 0;
+            // 找到畫面上所有的商品行
+            const allRows = document.querySelectorAll('.item-row');
+
+            // 每一行都拿出來算一次
+            allRows.forEach(function(row) {
+                const price = 1000; // 單價
+                const qty = row.querySelector('.count').value; // 拿到輸入的數量
+                const sub = price * qty; // 計算小計
+
+                // 把小計顯示在該行的最後一格
+                row.querySelector('.subtotal').innerText = sub;
+                
+                // 把這行的小計加到總金額裡
+                total = total + sub;
+            });
+
+            // 最後把總金額顯示出來
+            document.getElementById('total-price').innerText = total;
+        }
+    </script>
+
+</body>
+</html>

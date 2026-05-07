@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尊爵水晶典藏館 - 滿額優惠版</title>
+    <style>
+        /* 承襲先前的奢華黑金風格 */
+        :root {
+            --gold: #d4af37;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: #050505;
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            min-height: 100vh;
+            font-family: "Microsoft JhengHei", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 0;
+            margin: 0;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        #mouse-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), rgba(212, 175, 55, 0.08), transparent 80%);
+            z-index: 0;
+        }
+
+        .content-wrapper { position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+        h3 { color: var(--gold); letter-spacing: 12px; font-size: 2.5em; margin-bottom: 40px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+
+        table { border-collapse: separate; border-spacing: 15px; width: 95%; max-width: 1100px; }
+
+        td {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 30px;
+            transition: all 0.5s ease;
+        }
+
+        tr:first-child td { background: rgba(212, 175, 55, 0.1); color: var(--gold); font-weight: bold; }
+
+        td img {
+            width: 100px; height: 100px; object-fit: contain; margin-bottom: 20px;
+            -webkit-box-reflect: below 2px linear-gradient(transparent 70%, rgba(255, 255, 255, 0.05));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.05));
+            animation: crystalBreath 4s infinite ease-in-out;
+        }
+
+        @keyframes crystalBreath {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .quantity-control { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .btn-qty {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--gold); width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+        }
+        .btn-qty:hover { background: var(--gold); color: #000; }
+        .count { background: transparent; border: none; color: #fff; width: 35px; text-align: center; font-size: 1.1em; }
+
+        /* 結帳與折扣顯示區 */
+        .checkout-area {
+            margin-top: 50px; padding: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: right; width: 95%; max-width: 1100px; box-sizing: border-box;
+        }
+
+        .price-line { margin: 10px 0; font-size: 1.2em; }
+        .original-price { text-decoration: line-through; color: #888; font-size: 0.9em; display: none; }
+        #discount-info { color: #2ed573; font-weight: bold; margin-bottom: 10px; min-height: 1.5em; }
+        #total-price { color: var(--gold); font-size: 2.2em; font-weight: bold; }
+
+        .btn-checkout {
+            background: linear-gradient(90deg, #d4af37, #f2d982);
+            border: none; padding: 18px 70px; border-radius: 50px;
+            font-weight: bold; cursor: pointer; transition: 0.4s; font-size: 1.2em; color: #000;
+        }
+        .btn-checkout:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4); }
+    </style>
+</head>
+<body>
+
+    <div id="mouse-glow"></div>
+
+    <div class="content-wrapper">
+        <h3>尊爵水晶典藏館</h3>
+
+        <table>
+            <tr><td>商品項目</td><td>單價</td><td>收藏數量</td><td>小計</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/r011.png" alt=""><br>紅水晶</td><td class="unit-price">1000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/y012.png" alt=""><br>黃水晶</td><td class="unit-price">1200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/g013.png" alt=""><br>綠水晶</td><td class="unit-price">1500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/b014.png" alt=""><br>海藍寶</td><td class="unit-price">1800</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/p015.png" alt=""><br>紫水晶</td><td class="unit-price">2000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/pink01.png" alt=""><br>粉水晶</td><td class="unit-price">2200</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/w016.png" alt=""><br>白水晶</td><td class="unit-price">2500</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+            <tr class="item-row"><td><img src="./s20260507img/black017.png" alt=""><br>黑水晶</td><td class="unit-price">3000</td><td><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><input type="number" class="count" value="0" readonly><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></td><td class="subtotal">0</td></tr>
+        </table>
+
+        <div class="checkout-area">
+            <div id="discount-info">挑選您的心儀水晶...</div>
+            <div class="price-line">原始金額：<span id="raw-price" class="original-price">0</span></div>
+            <div class="price-line">最終收藏價值：NT$ <span id="total-price">0</span></div>
+            <button class="btn-checkout" onclick="checkout()">立即結帳</button>
+        </div>
+    </div>
+
+    <script>
+        // 滑鼠光暈
+        const glow = document.getElementById('mouse-glow');
+        window.addEventListener('mousemove', (e) => {
+            glow.style.setProperty('--x', (e.clientX / window.innerWidth) * 100 + '%');
+            glow.style.setProperty('--y', (e.clientY / window.innerHeight) * 100 + '%');
+        });
+
+        function changeQty(btn, change) {
+            const input = btn.parentElement.querySelector('.count');
+            let val = parseInt(input.value) + change;
+            if (val < 0) val = 0;
+            input.value = val;
+            updateCart();
+        }
+
+        function updateCart() {
+            let rawTotal = 0;
+            document.querySelectorAll('.item-row').forEach(row => {
+                const price = parseInt(row.querySelector('.unit-price').innerText);
+                const count = parseInt(row.querySelector('.count').value);
+                const sub = price * count;
+                row.querySelector('.subtotal').innerText = sub.toLocaleString();
+                rawTotal += sub;
+            });
+
+            let finalTotal = rawTotal;
+            let discountText = "";
+            let discountRate = 1;
+
+            // 折扣判斷邏輯
+            if (rawTotal >= 100000) {
+                discountRate = 0.8;
+                discountText = "✨ 尊榮尊選：已享 8 折優惠！";
+            } else if (rawTotal >= 30000) {
+                discountRate = 0.9;
+                discountText = "💎 大宗典藏：已享 9 折優惠！ (再買 " + (100000 - rawTotal).toLocaleString() + " 享 8 折)";
+            } else if (rawTotal >= 10000) {
+                discountRate = 0.95;
+                discountText = "🌟 經典收藏：已享 95 折優惠！ (再買 " + (30000 - rawTotal).toLocaleString() + " 享 9 折)";
+            } else if (rawTotal > 0) {
+                discountText = "再買 " + (10000 - rawTotal).toLocaleString() + " 即可享有 95 折優惠！";
+            }
+
+            finalTotal = Math.round(rawTotal * discountRate);
+
+            // 更新介面
+            const rawDisplay = document.getElementById('raw-price');
+            if (discountRate < 1) {
+                rawDisplay.style.display = "inline";
+                rawDisplay.innerText = "NT$ " + rawTotal.toLocaleString();
+            } else {
+                rawDisplay.style.display = "none";
+            }
+
+            document.getElementById('discount-info').innerText = discountText;
+            document.getElementById('total-price').innerText = finalTotal.toLocaleString();
+        }
+
+        function checkout() {
+            const total = document.getElementById('total-price').innerText;
+            if (total === "0") {
+                alert("購物車內尚無水晶。");
+            } else {
+                alert("💎 訂單成立！\n結帳總額為：NT$ " + total + "\n感謝您的選購。");
+            }
+        }
+    </script>
+</body>
+</html>
