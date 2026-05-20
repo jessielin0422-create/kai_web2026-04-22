@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <title>練習</title>
+     <style>
+          .box {
+               width: 300px;
+               height: 300px;
+               background: lightblue;
+               border-radius: 20px;
+               margin: 50px auto;
+               position: relative;
+          }
+
+
+          .btn-save {
+               position: absolute;
+               top: 20px;
+               right: 20px;
+               background: #4C5B4A;
+               /* 森林綠 */
+               color: white;
+               padding: 5px 15px;
+               border: none;
+               border-radius: 5px;
+               cursor: pointer;
+          }
+
+          .box2{
+               position:fixed;
+               bottom: 20px;
+               right: 20px;
+               width: 300px;
+               height: 300px;
+               background-color: lightgreen;
+               border:1px solid black;
+          }
+
+   .box3 {
+               position: sticky;
+               top: 50px;
+               right: 100px;
+               width: 300px;
+               height: 300px;
+               background-color: rgb(156, 201, 52);
+          }
+
+
+          .img{
+               width: 300px;
+               height: 300px;
+          }
+
+          .h{color: #4314cf;}
+
+     </style>
+</head>
+
+<body>
+ <h1>flowers world</h1>
+
+
+     <table>
+          <tr>
+               <td>
+                    <div class="box">
+                         <img src="./20260520img/01.jpg" alt="" class="img">
+                         <button class="btn-save">absolute</button>
+                    </div>
+               </td>
+                 <td>
+                    <div class="box">
+                         <img src="./20260520img/02.jpg" alt="" class="img">
+                         <button class="btn-save">absolute</button>
+                    </div>
+               </td>
+                <td>
+                    <div class="box">
+                         <img src="./20260520img/03.jpg" alt="" class="img">
+                         <button class="btn-save">absolute</button>
+                    </div>
+               </td>
+          </tr>
+          <tr>
+               <td>
+                    <div class="box">
+                         <img src="./20260520img/04.jpg" alt="" class="img">
+                         <button class="btn-save">absolute</button>
+                    </div>
+               </td>
+                 <td>
+                    <div class="box">
+                         <img src="./20260520img/05.jpg" alt="" class="img">
+                         <button class="btn-save">儲存</button>
+                    </div>
+               </td>
+               <td>
+                    <div class="box">
+                         <img src="./20260520img/06.jpg" alt="" class="img">
+                         <button class="btn-save">儲存</button>
+                    </div>
+               </td>
+          </tr>
+           <tr>
+               <td>
+                    <div class="box">
+                         <img src="./20260520img/07.jpg" alt="" class="img">
+                         <button class="btn-save">儲存</button>
+                    </div>
+               </td>
+                 <td>
+                    <div class="box">
+                         <img src="./20260520img/08.jpg" alt="" class="img">
+                         <button class="btn-save">儲存</button>
+                    </div>
+               </td>
+                <td>
+                    <div class="box">
+                         <img src="./20260520img/09.jpg" alt="" class="img">
+                         <button class="btn-save">儲存</button>
+                    </div>
+               </td>
+          </tr>
+     </table>
+
+     <div class="box box2">fixed
+           
+     </div>
+
+     <div class="box box3">sticky</div>
+
+
+</table>
+</body>
+
+</html>
