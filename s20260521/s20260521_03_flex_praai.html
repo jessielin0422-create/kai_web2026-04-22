@@ -3,9 +3,10 @@
 
 <head>
      <meta charset="UTF-8">
+
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <title>Pinterest 植物美學牆</title>
+     <title>Plant Aesthetic</title>
 
      <style>
           * {
@@ -14,28 +15,189 @@
 
           body {
                margin: 0;
-               padding: 20px;
+
+               padding: 0;
 
                background-color: #f7f7f7;
 
                font-family: sans-serif;
+
+               color: #333;
           }
 
-          /* 🌟 搜尋列 */
-          .search-form {
-               width: 90%;
+          /* 🌿 fixed 導覽列 */
+          .header {
 
-               margin: 0 auto 30px auto;
+               position: fixed;
+
+               top: 0;
+               left: 0;
+
+               width: 100%;
+
+               background-color: rgba(255,255,255,0.95);
+
+               backdrop-filter: blur(10px);
+
+               padding: 18px 40px;
 
                display: flex;
 
-               gap: 10px;
+               justify-content: space-between;
+
+               align-items: center;
+
+               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+               z-index: 1000;
+          }
+
+          .header h1 {
+
+               margin: 0;
+
+               color: #2d6a4f;
+          }
+
+          .nav-menu {
+
+               display: flex;
+
+               gap: 25px;
+          }
+
+          .nav-menu a {
+
+               text-decoration: none;
+
+               color: #444;
+
+               font-weight: bold;
+
+               transition: 0.3s;
+          }
+
+          .nav-menu a:hover {
+
+               color: #2d6a4f;
+          }
+
+          /* 🌿 Hero Banner */
+          .hero-banner {
+
+               position: relative;
+
+               width: 90%;
+
+               height: 450px;
+
+               margin: 110px auto 40px auto;
+
+               border-radius: 30px;
+
+               overflow: hidden;
+
+               background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1400');
+
+               background-size: cover;
+
+               background-position: center;
+          }
+
+          .hero-overlay {
+
+               position: absolute;
+
+               inset: 0;
+
+               background: rgba(0,0,0,0.35);
+          }
+
+          .hero-content {
+
+               position: absolute;
+
+               top: 50%;
+               left: 50%;
+
+               transform: translate(-50%,-50%);
+
+               text-align: center;
+
+               color: white;
+
+               z-index: 2;
+          }
+
+          .hero-content h2 {
+
+               font-size: 52px;
+
+               margin-bottom: 20px;
+          }
+
+          .hero-content p {
+
+               font-size: 18px;
+
+               margin-bottom: 30px;
+          }
+
+          .hero-content button {
+
+               padding: 15px 35px;
+
+               border: none;
+
+               border-radius: 999px;
+
+               background: linear-gradient(135deg,#40916c,#2d6a4f);
+
+               color: white;
+
+               font-size: 16px;
+
+               font-weight: bold;
+
+               cursor: pointer;
+
+               transition: 0.3s;
+          }
+
+          .hero-content button:hover {
+
+               transform: translateY(-4px);
+
+               box-shadow: 0 10px 24px rgba(45,106,79,0.35);
+          }
+
+          /* 🌿 sticky 搜尋列 */
+          .search-form {
+
+               position: sticky;
+
+               top: 85px;
+
+               z-index: 999;
+
+               width: 90%;
+
+               margin: auto auto 30px auto;
+
+               display: flex;
+
+               gap: 12px;
+
+               padding: 10px;
+
+               background-color: #f7f7f7;
           }
 
           .search-form input {
+
                flex: 1;
 
-               padding: 14px 20px;
+               padding: 16px 20px;
 
                border: none;
 
@@ -47,15 +209,12 @@
 
                outline: none;
 
-               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-          }
-
-          .search-form input:focus {
-               box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+               box-shadow: 0 4px 12px rgba(0,0,0,0.05);
           }
 
           .search-form button {
-               padding: 14px 24px;
+
+               padding: 14px 28px;
 
                border: none;
 
@@ -65,23 +224,63 @@
 
                color: white;
 
-               font-size: 15px;
-
                font-weight: bold;
 
                cursor: pointer;
+          }
+
+          /* 🌿 分類區 */
+          .category-section {
+
+               width: 90%;
+
+               margin: 40px auto;
+
+               display: grid;
+
+               grid-template-columns: repeat(4,1fr);
+
+               gap: 20px;
+          }
+
+          .category-card {
+
+               background-color: white;
+
+               border-radius: 24px;
+
+               padding: 35px 20px;
+
+               text-align: center;
+
+               font-size: 50px;
+
+               box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 
                transition: 0.3s;
           }
 
-          .search-form button:hover {
-               background-color: #1b4332;
+          .category-card:hover {
 
-               transform: translateY(-2px);
+               transform: translateY(-8px);
           }
 
-          /* 🌟 主版面 */
-          .main-layout {
+          .category-card span {
+
+               display: block;
+
+               margin-top: 15px;
+
+               font-size: 16px;
+
+               color: #444;
+
+               font-weight: bold;
+          }
+
+          /* 🌿 主內容 */
+          .main {
+
                width: 90%;
 
                margin: auto;
@@ -93,8 +292,9 @@
                align-items: flex-start;
           }
 
-          /* 🌟 Pinterest 瀑布流 */
+          /* 🌿 Pinterest */
           .pinterest-container {
+
                flex: 4;
 
                column-count: 3;
@@ -102,76 +302,73 @@
                column-gap: 20px;
           }
 
-          /* 🌟 卡片 */
+          /* 🌿 卡片 */
           .pin-item {
+
+               position: relative;
+
                break-inside: avoid;
 
                margin-bottom: 20px;
 
                background-color: white;
 
-               border-radius: 18px;
+               border-radius: 24px;
 
                overflow: hidden;
 
-               position: relative;
-
-               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 
                transition: 0.3s;
           }
 
           .pin-item:hover {
-               transform: translateY(-4px);
 
-               box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+               transform: translateY(-5px);
+
+               box-shadow: 0 12px 24px rgba(0,0,0,0.12);
           }
 
-          /* 🌟 收藏按鈕 */
+          /* 🌿 收藏按鈕 absolute */
           .img-link {
+
                position: absolute;
 
                top: 15px;
                right: 15px;
 
-               width: 42px;
-               height: 42px;
+               width: 45px;
+               height: 45px;
+
+               background-color: rgba(255,255,255,0.9);
 
                border-radius: 50%;
-
-               background-color: rgba(255, 255, 255, 0.9);
 
                display: flex;
 
                justify-content: center;
                align-items: center;
 
-               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-
-               transition: 0.3s;
+               box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
                opacity: 0;
 
-               z-index: 10;
+               transition: 0.3s;
           }
 
           .pin-item:hover .img-link {
+
                opacity: 1;
           }
 
-          .img-link:hover {
-               transform: scale(1.1);
-
-               background-color: white;
-          }
-
           .img-link img {
+
                width: 20px;
-               height: 20px;
           }
 
-          /* 🌟 圖片 */
+          /* 🌿 圖片 */
           .pin-image {
+
                width: 100%;
 
                display: block;
@@ -180,47 +377,54 @@
           }
 
           .pin-item:hover .pin-image {
+
                transform: scale(1.05);
           }
 
-          /* 🌟 卡片文字 */
+          /* 🌿 卡片文字 */
           .pin-content {
-               padding: 16px;
 
-               font-size: 15px;
+               padding: 16px;
 
                font-weight: bold;
 
-               color: #444;
+               transition: 0.3s;
           }
 
-          /* 🌟 Sidebar */
-          .sidebar {
-               flex: 1;
+          .pin-item:hover .pin-content {
 
-               background-color: white;
-
-               border-radius: 20px;
-
-               padding: 25px;
-
-               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-
-               position: sticky;
-
-               top: 20px;
-          }
-
-          .sidebar h2 {
-               margin-top: 0;
-
-               margin-bottom: 20px;
+               background-color: #f1f8f4;
 
                color: #2d6a4f;
           }
 
-          /* 🌟 表單 */
+          /* 🌿 sticky 側邊欄 */
+          .sidebar {
+
+               position: sticky;
+
+               top: 180px;
+
+               flex: 1;
+
+               background-color: white;
+
+               padding: 25px;
+
+               border-radius: 24px;
+
+               box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          }
+
+          .sidebar h2 {
+
+               margin-top: 0;
+
+               color: #2d6a4f;
+          }
+
           .side-form {
+
                display: flex;
 
                flex-direction: column;
@@ -230,6 +434,7 @@
 
           .side-form input,
           .side-form textarea {
+
                width: 100%;
 
                padding: 14px;
@@ -240,18 +445,18 @@
 
                background-color: #f3f3f3;
 
-               font-size: 14px;
-
                outline: none;
           }
 
           .side-form textarea {
+
                resize: none;
 
                height: 120px;
           }
 
           .side-form button {
+
                padding: 14px;
 
                border: none;
@@ -262,46 +467,40 @@
 
                color: white;
 
-               font-size: 15px;
-
                font-weight: bold;
 
                cursor: pointer;
-
-               transition: 0.3s;
           }
 
-          .side-form button:hover {
-               background-color: #1b4332;
+          /* 🌿 fixed 客服資訊 */
+          .contact-fixed {
 
-               transform: translateY(-2px);
-          }
-
-          /* 🌟 右下角固定客服 */
-          .promo-box {
                position: fixed;
 
                right: 20px;
-               bottom: 20px;
 
-               width: 300px;
+               top: 50%;
 
-               background-color: white;
+               transform: translateY(-50%);
 
-               border-radius: 22px;
+               width: 220px;
 
-               padding: 24px;
+               background-color: rgba(255,255,255,0.95);
 
-               box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+               backdrop-filter: blur(10px);
+
+               border-radius: 20px;
+
+               padding: 20px;
+
+               box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 
                z-index: 999;
-
-               animation: floatUp 0.6s ease;
           }
 
-          /* 🌟 標題 */
-          .promo-title {
-               font-size: 22px;
+          .contact-title {
+
+               font-size: 18px;
 
                font-weight: bold;
 
@@ -310,53 +509,31 @@
                margin-bottom: 15px;
           }
 
-          /* 🌟 優惠內容 */
-          .promo-content {
+          .contact-info {
+
                font-size: 14px;
 
                line-height: 1.8;
 
                color: #555;
-
-               margin-bottom: 20px;
           }
 
-          /* 🌟 分隔線 */
-          .promo-line {
+          .contact-line {
+
                height: 1px;
 
-               background-color: #e5e5e5;
+               background-color: #ddd;
 
                margin: 20px 0;
           }
 
-          /* 🌟 客服標題 */
-          .service-title {
-               font-size: 15px;
+          .contact-btn {
 
-               font-weight: bold;
-
-               color: #2d6a4f;
-
-               margin-bottom: 8px;
-          }
-
-          /* 🌟 客服資訊 */
-          .service-info {
-               font-size: 14px;
-
-               color: #555;
-
-               margin-bottom: 18px;
-
-               line-height: 1.6;
-          }
-
-          /* 🌟 按鈕 */
-          .promo-btn {
                width: 100%;
 
-               padding: 14px;
+               padding: 12px;
+
+               margin-top: 15px;
 
                border: none;
 
@@ -366,83 +543,179 @@
 
                color: white;
 
-               font-size: 15px;
-
                font-weight: bold;
 
                cursor: pointer;
-
-               transition: 0.3s;
           }
 
-          .promo-btn:hover {
+          /* 🌿 統計數字 */
+          .stats-section {
+
+               width: 90%;
+
+               margin: 60px auto;
+
+               display: flex;
+
+               gap: 20px;
+          }
+
+          .stat-box {
+
+               flex: 1;
+
+               background-color: white;
+
+               border-radius: 24px;
+
+               padding: 35px;
+
+               text-align: center;
+
+               box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+          }
+
+          .stat-box h3 {
+
+               margin: 0;
+
+               font-size: 42px;
+
+               color: #2d6a4f;
+          }
+
+          .stat-box p {
+
+               color: #666;
+          }
+
+          /* 🌿 Footer */
+          .footer {
+
+               margin-top: 80px;
+
+               padding: 60px 20px;
+
                background-color: #1b4332;
 
-               transform: translateY(-2px);
+               color: white;
+
+               text-align: center;
           }
 
-          /* 🌟 動畫 */
-          @keyframes floatUp {
+          .footer-links {
 
-               from {
-                    opacity: 0;
-                    transform: translateY(30px);
-               }
-
-               to {
-                    opacity: 1;
-                    transform: translateY(0);
-               }
+               margin-top: 20px;
           }
 
-          /* 📱 平板 */
+          .footer-links a {
+
+               color: white;
+
+               text-decoration: none;
+
+               margin: 0 10px;
+          }
+
+          /* 📱 RWD */
           @media (max-width: 1000px) {
 
+               .category-section {
+
+                    grid-template-columns: repeat(2,1fr);
+               }
+
                .pinterest-container {
+
                     column-count: 2;
                }
           }
 
-          /* 📱 手機 */
           @media (max-width: 800px) {
 
-               .main-layout {
+               .main {
+
                     flex-direction: column;
                }
 
-               .sidebar {
-                    width: 100%;
-               }
-
                .pinterest-container {
-                    width: 100%;
 
                     column-count: 1;
                }
 
-               .search-form {
+               .category-section {
+
+                    grid-template-columns: 1fr;
+               }
+
+               .stats-section {
+
                     flex-direction: column;
                }
 
-               .search-form button {
-                    width: 100%;
-               }
+               .contact-fixed {
 
-               .promo-box {
-                    width: calc(100% - 40px);
+                    position: static;
 
-                    right: 20px;
-                    left: 20px;
+                    transform: none;
 
-                    bottom: 20px;
+                    width: 90%;
+
+                    margin: 30px auto;
                }
           }
+
      </style>
+
 </head>
 
 <body>
 
-     <!-- 🌟 搜尋列 -->
+     <!-- 🌿 fixed Header -->
+     <header class="header">
+
+          <h1>
+               🌿 Plant Aesthetic
+          </h1>
+
+          <nav class="nav-menu">
+
+               <a href="#">首頁</a>
+
+               <a href="#">植物</a>
+
+               <a href="#">美學</a>
+
+               <a href="#">聯絡我們</a>
+
+          </nav>
+
+     </header>
+
+     <!-- 🌿 Hero Banner -->
+     <section class="hero-banner">
+
+          <div class="hero-overlay"></div>
+
+          <div class="hero-content">
+
+               <h2>
+                    探索植物與自然美學
+               </h2>
+
+               <p>
+                    Discover Green Lifestyle
+               </p>
+
+               <button>
+                    開始探索
+               </button>
+
+          </div>
+
+     </section>
+
+     <!-- 🌿 sticky 搜尋 -->
      <form class="search-form">
 
           <input
@@ -450,37 +723,55 @@
                placeholder="搜尋植物、美學、花卉..."
           >
 
-          <button type="submit">
+          <button>
                搜尋
           </button>
 
      </form>
 
-     <!-- 🌟 主版面 -->
-     <div class="main-layout">
+     <!-- 🌿 分類 -->
+     <section class="category-section">
 
-          <!-- 🌟 左邊 Pinterest -->
+          <div class="category-card">
+               🌵
+               <span>多肉植物</span>
+          </div>
+
+          <div class="category-card">
+               🌿
+               <span>觀葉植物</span>
+          </div>
+
+          <div class="category-card">
+               🌸
+               <span>花卉美學</span>
+          </div>
+
+          <div class="category-card">
+               🍀
+               <span>療癒植物</span>
+          </div>
+
+     </section>
+
+     <!-- 🌿 主內容 -->
+     <div class="main">
+
+          <!-- 🌿 Pinterest -->
           <div class="pinterest-container">
 
-               <!-- 卡片 1 -->
+               <!-- 卡片 -->
                <div class="pin-item">
 
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
+                    <a class="img-link" href="#">
 
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
+                         <img src="https://img.icons8.com/m_rounded/50/737373/save.png">
 
                     </a>
 
                     <img
                          class="pin-image"
-                         src="https://images.unsplash.com/photo-1520763185298-1b434c919102?w=500&auto=format&fit=crop"
-                         alt="Tulip"
+                         src="https://images.unsplash.com/photo-1520763185298-1b434c919102?w=500"
                     >
 
                     <div class="pin-content">
@@ -489,25 +780,17 @@
 
                </div>
 
-               <!-- 卡片 2 -->
                <div class="pin-item">
 
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
+                    <a class="img-link" href="#">
 
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
+                         <img src="https://img.icons8.com/m_rounded/50/737373/save.png">
 
                     </a>
 
                     <img
                          class="pin-image"
-                         src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500&auto=format&fit=crop"
-                         alt="Monstera"
+                         src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=500"
                     >
 
                     <div class="pin-content">
@@ -516,120 +799,33 @@
 
                </div>
 
-               <!-- 卡片 3 -->
                <div class="pin-item">
 
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
+                    <a class="img-link" href="#">
 
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
+                         <img src="https://img.icons8.com/m_rounded/50/737373/save.png">
 
                     </a>
 
                     <img
                          class="pin-image"
-                         src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=500&auto=format&fit=crop"
-                         alt="Flowers"
+                         src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=500"
                     >
 
                     <div class="pin-content">
-                         優雅洋桔梗
-                    </div>
-
-               </div>
-
-               <!-- 卡片 4 -->
-               <div class="pin-item">
-
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
-
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
-
-                    </a>
-
-                    <img
-                         class="pin-image"
-                         src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=500&auto=format&fit=crop"
-                         alt="Succulents"
-                    >
-
-                    <div class="pin-content">
-                         療癒多肉植物
-                    </div>
-
-               </div>
-
-               <!-- 卡片 5 -->
-               <div class="pin-item">
-
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
-
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
-
-                    </a>
-
-                    <img
-                         class="pin-image"
-                         src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=500&auto=format&fit=crop"
-                         alt="Daisy"
-                    >
-
-                    <div class="pin-content">
-                         小雛菊
-                    </div>
-
-               </div>
-
-               <!-- 卡片 6 -->
-               <div class="pin-item">
-
-                    <a
-                         class="img-link"
-                         href="#"
-                    >
-
-                         <img
-                              src="https://img.icons8.com/m_rounded/50/737373/save.png"
-                              alt="save"
-                         >
-
-                    </a>
-
-                    <img
-                         class="pin-image"
-                         src="https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&auto=format&fit=crop"
-                         alt="Eucalyptus"
-                    >
-
-                    <div class="pin-content">
-                         清新尤加利葉
+                         多肉植物
                     </div>
 
                </div>
 
           </div>
 
-          <!-- 🌟 右邊表單 -->
+          <!-- 🌿 側邊欄 -->
           <div class="sidebar">
 
-               <h2>植物總表單</h2>
+               <h2>
+                    植物資料表單
+               </h2>
 
                <form class="side-form">
 
@@ -647,7 +843,7 @@
                          placeholder="植物介紹..."
                     ></textarea>
 
-                    <button type="submit">
+                    <button>
                          新增植物
                     </button>
 
@@ -657,52 +853,96 @@
 
      </div>
 
-     <!-- 🌟 右下角固定客服資訊 -->
-     <div class="promo-box">
+     <!-- 🌿 統計 -->
+     <section class="stats-section">
 
-          <!-- 標題 -->
-          <div class="promo-title">
+          <div class="stat-box">
+
+               <h3>1500+</h3>
+
+               <p>植物照片</p>
+
+          </div>
+
+          <div class="stat-box">
+
+               <h3>320+</h3>
+
+               <p>植物種類</p>
+
+          </div>
+
+          <div class="stat-box">
+
+               <h3>98%</h3>
+
+               <p>使用者喜愛</p>
+
+          </div>
+
+     </section>
+
+     <!-- 🌿 fixed 客服 -->
+     <div class="contact-fixed">
+
+          <div class="contact-title">
                🌿 最新優惠
           </div>
 
-          <!-- 優惠內容 -->
-          <div class="promo-content">
+          <div class="contact-info">
 
                🌱 全館植物 85 折<br>
+
                🎁 加入會員送小盆栽<br>
+
                📦 滿 1500 元免運
 
           </div>
 
-          <!-- 分隔線 -->
-          <div class="promo-line"></div>
+          <div class="contact-line"></div>
 
-          <!-- 客服 -->
-          <div class="service-title">
+          <div class="contact-title">
                💬 線上客服
           </div>
 
-          <div class="service-info">
-               LINE：@plantlife
+          <div class="contact-info">
+
+               LINE：@plantlife<br>
+
+               ☎ 02-1234-5678
+
           </div>
 
-          <!-- 電話 -->
-          <div class="service-title">
-               ☎ 聯絡電話
-          </div>
+          <button class="contact-btn">
 
-          <div class="service-info">
-               <a href="tel:0212345678">
-                    02-1234-5678
-               </a>
-          </div>
-
-          <!-- 按鈕 -->
-          <button class="promo-btn">
                立即聯絡
+
           </button>
 
      </div>
+
+     <!-- 🌿 Footer -->
+     <footer class="footer">
+
+          <h3>
+               🌿 Plant Aesthetic
+          </h3>
+
+          <p>
+               探索植物與自然生活風格
+          </p>
+
+          <div class="footer-links">
+
+               <a href="#">Instagram</a>
+
+               <a href="#">Pinterest</a>
+
+               <a href="#">LINE</a>
+
+          </div>
+
+     </footer>
 
 </body>
 
