@@ -8,34 +8,33 @@
      <style>
           .container-row {
                width: 100%;
-               height: 25vh;
+               /* height: 50vh; */
                background-color: lightcoral;
                margin: auto;
 
                display: flex;
-               justify-content: space-around;
-               align-items: center;
-          }
-
-          .container-column {
-               width: 30%;
-               height: 110vh;
-               background-color: lightcoral;
-               margin: auto;
-
-               display: flex;
-               flex-direction: column;
                justify-content: space-around;
                align-items: center;
                
-               /* justify-content: space-around;
-                align-items: center; */
+               flex-wrap: wrap;
+                /* 加上這個後,原本itemu有10個在同一排,全部擠在一起,
+               item會依照同一排有的數字設定下(可以放7個看得較清楚),
+               弟8個下一個item會自動往下排排 */
           }
+
+
 
           .item {
                width: 300px;
                height: 300px;
                background-color: aqua;
+
+               margin-top: 20px;
+               margin-right: 20px;
+          }
+
+          .item-hidden{
+               opacity: 10%;
           }
 
           h1 {
@@ -50,16 +49,30 @@
           <div class="item"></div>
           <div class="item"></div>
           <div class="item"></div>
+
+          <div class="item"></div>
+          <div class="item item-hidden"></div>
+          <div class="item"></div>
+
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+
+          <div class="item"></div>
+          <div class="item item-hidden"></div>
+          <div class="item"></div>
+
+          <div class="item"></div>
+          <div class="item item-hidden"></div>
+          <div class="item"></div>
+
+          <div class="item"></div>
+          <div class="item item-hidden"></div>
+          <div class="item"></div>
      </div>
 
      <hr>
 
-     <h1>flex column 直向</h1>
-     <div class="container-column">
-          <div class="item"></div>
-          <div class="item"></div>
-          <div class="item"></div>
-     </div>
 
 
      <p>&nbsp;</p>
