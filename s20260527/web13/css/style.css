@@ -11,24 +11,53 @@
 .container {
      width: 1024px;
      height: calc(768px - 65px - 20px);
-     background-color: rgb(220, 177, 157);
+     background-color: rgb(231, 167, 137);
      margin: auto;
 
      display: flex;
-     /* justify-content: center;
-     align-iteam: center; */
+     /* justify-content: center; */
+     /* align-iteam: center; */
 }
 
-.cintainer-left {
+.container-left {
      width: 215px;
-     background-color: blue;
+     background-color: rgb(61, 61, 236);
 
+     display: flex;
+     flex-direction: column;
+     /* justify-content: center; */
+     /* align-iteam: center; */
 }
 
-.cintainer-right {
+.container-right {
      width: calc(100% - 215px);
-     background-color: lightcoral;
+     background-color: rgb(230, 105, 105);
+}
 
+
+.left-top {
+     width: 100%;
+     height: calc(100% - 25px);
+     background-color: lightgray;
+}
+
+.left-bottom { 
+     width: 100%;
+     height: 25px;
+     background-color: aqua;
+}
+
+.right-top {
+     width: 100%;
+     height: 29px;
+     background-color: lightpink;
+ 
+}
+
+.right-bottom {
+     width: 100%;
+     height: calc(100% - 29px);
+     background-color: lightgreen;
 }
 
 /* footer */
