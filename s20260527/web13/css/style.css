@@ -1,21 +1,40 @@
 /* header */
-.header{width: 1024px;
+.header {
+     width: 1024px;
      height: 65px;
      background-color: lightblue;
-     margin: anto;
+     margin: auto;
 }
 
 
 /* container */
-.container{width: 1024px;
-     height: calc(768px - 65px -20px);
-     background-color: rgb(173, 230, 206);
-     margin: anto;
+.container {
+     width: 1024px;
+     height: calc(768px - 65px - 20px);
+     background-color: rgb(220, 177, 157);
+     margin: auto;
+
+     display: flex;
+     /* justify-content: center;
+     align-iteam: center; */
+}
+
+.cintainer-left {
+     width: 215px;
+     background-color: blue;
+
+}
+
+.cintainer-right {
+     width: calc(100% - 215px);
+     background-color: lightcoral;
+
 }
 
 /* footer */
-.footer{width: 1024px;
+.footer {
+     width: 1024px;
      height: 20px;
      background-color: rgb(230, 173, 220);
-     margin: anto;
+     margin: auto;
 }
