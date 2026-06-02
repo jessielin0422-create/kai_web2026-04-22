@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          div {
+               width: 100px;
+               height: 100px;
+               background-color: red;
+               animation-name: myAnimation;
+               animation-duration: 4s;
+          }
+
+          @keyframes myAnimation {
+               0% {
+                    background-color: lightblue;
+                    width: 100px;
+               }
+
+               25% {
+                    background-color: lightcoral;
+                    width: 200px;
+               }
+
+               50% {
+                    background-color: lightgreen;
+                    width: 100px;
+               }
+
+               
+
+               100% {
+                    background-color: lightblue;
+                    width: 100px;
+               }
+          }
+     </style>
+</head>
+
+<body>
+     <h3>CSS Animation</h3>
+     <div></div>
+     <p><b>Note:</b>When an animation is finished, it goes back to its original style.</p>
+</body>
+
+</html>
