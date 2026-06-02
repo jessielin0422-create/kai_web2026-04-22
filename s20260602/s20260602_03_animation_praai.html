@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Box 繞圈圈動畫</title>
+     <style>
+          /* 1. 定義正方形方塊的初始外觀 */
+          .box1 {
+               width: 100px;
+               height: 100px;
+               background-color: lightblue;
+               
+               /* 💡 這裡我們使用 position: absolute 搭配 top/left 來做移動 */
+               position: absolute;
+               top: 50px;
+               left: 50px;
+
+               /* ✨ 綁定動畫：套用名為 squareMove 的劇本，片長 4 秒，
+                  速度維持勻速(linear)，並且無限循環(infinite) */
+               animation: squareMove 4s linear infinite;
+          }
+
+          /* 2. 撰寫 @keyframes 動畫劇本 */
+          @keyframes squareMove {
+               0% {
+                    top: 50px;
+                    left: 50px;
+                    background-color: lightblue; /* 初始：左上（藍） */
+               }
+               25% {
+                    top: 50px;
+                    left: 350px;
+                    background-color: lightgreen; /* 第一步：往右（綠） */
+               }
+               50% {
+                    top: 350px;
+                    left: 350px;
+                    background-color: lightyellow; /* 第二步：往下（黃） */
+               }
+               75% {
+                    top: 350px;
+                    left: 50px;
+                    background-color: orange; /* 第三步：往左（橘） */
+               }
+               100% {
+                    top: 50px;
+                    left: 50px;
+                    background-color: lightblue; /* 第四步：往上回到原點（藍） */
+               }
+          }
+     </style>
+</head>
+
+<body>
+     <div class="box box1"></div>
+</body>
+
+</html>

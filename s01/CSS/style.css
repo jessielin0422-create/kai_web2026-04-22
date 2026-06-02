@@ -1,23 +1,37 @@
+* {
+     box-sizing: border-box;
+     /* 內容 大於表格時隱藏 */
+     overflow: hidden;
+}
+
 H {
      width: 1024px;
      height: 65px;
      margin: auto;
      background-color: lightblue;
 
-
-border:1px solid black;
-border-bottom: 0px;
+     border: 1px solid black;
+     border-bottom: 0px;
 }
 
-C {}
+C {
+     width: 1024px;
+     height: calc(768px - 65px - 20px);
+     background-color: rgb(210, 138, 199);
+     margin: auto;
+     display: flex;
+}
 
-CR {}
+CL {
+     width: 215px;
+     display: flex;
+     flex-direction: column;
+}
 
-RT {}
+CR {
+     width: calc(100% - 215px);
 
-RB {}
-
-CL {}
+}
 
 LT {}
 
@@ -26,6 +40,15 @@ MT {}
 MC {}
 
 M LBU {}
+
+
+RT {}
+
+RB {}
+
+
+
+
 
 
 
