@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWD 圖片顯示範例</title>
+    <style>
+        /* =================================================== */
+        /* 1. 手機版樣式 (預設樣式，採取行動優先 Mobile First 觀念) */
+        /* =================================================== */
+        .gallery {
+            display: flex;
+            flex-direction: column; /* 讓圖片直排 */
+            gap: 15px;             /* 圖片之間的間距 */
+            padding: 15px;
+        }
+
+        .gallery img {
+            width: 100%;           /* 圖片寬度填滿螢幕 */
+            height: 200px;
+            object-fit: cover;     /* 避免圖片變形 */
+            border-radius: 8px;
+        }
+
+        /* =================================================== */
+        /* 2. 平板版樣式 (螢幕寬度 768px 以上)                     */
+        /* =================================================== */
+        @media screen and (min-width: 768px) {
+            .gallery {
+                display: grid;
+                /* 改成網格佈局：一排 3 個，共兩排，剛好顯示 6 張 */
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 20px;
+            }
+            
+            /* 確保在平板時，所有圖片都是顯示的 */
+            .gallery img {
+                display: block; 
+                height: 250px;
+            }
+        }
+
+        /* =================================================== */
+        /* 3. 電腦版樣式 (螢幕寬度 1024px 以上)                    */
+        /* =================================================== */
+        @media screen and (min-width: 1024px) {
+            .gallery {
+                /* 回復成單一區塊佈局，讓唯一顯示的圖片撐滿 */
+                display: block; 
+                max-width: 800px;
+                margin: 0 auto;  /* 讓圖片居中 */
+            }
+
+            /* ✨ 關鍵：隱藏第 2 到第 6 張圖片，只留第一張 */
+            .gallery img:not(:first-child) {
+                display: none;
+            }
+
+            .gallery img:first-child {
+                height: 500px; /* 電腦版大圖放大高度 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gallery">
+        <img src="https://picsum.photos/800/600?random=1" alt="圖片 1">
+        <img src="https://picsum.photos/800/600?random=2" alt="圖片 2">
+        <img src="https://picsum.photos/800/600?random=3" alt="圖片 3">
+        <img src="https://picsum.photos/800/600?random=4" alt="圖片 4">
+        <img src="https://picsum.photos/800/600?random=5" alt="圖片 5">
+        <img src="https://picsum.photos/800/600?random=6" alt="圖片 6">
+    </div>
+
+</body>
+</html>
