@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>座右銘產生器</title>
+     <style>
+          * {
+               box-sizing: border-box;
+          }
+
+          .box {
+               width: 300px;
+               height: 350px; /* 稍微加高一點，讓字不會擠在一起 */
+               background-color: lightblue;
+               margin: auto;
+               border-radius: 30px;
+               text-align: center;
+               padding: 20px;
+          }
+     </style>
+</head>
+
+<body>
+     <div class="box">
+          <p>
+               <input type="text" id="myName" value="kai" placeholder="name...">
+          </p>
+          <p>
+               <input type="text" id="myText" value="全力以赴" placeholder="text...">
+          </p>
+          <p>
+               <button type="button" id="myBtn">myBtn</button>
+          </p>
+
+          <span id="mySpan">我是XXX , 人生座右銘XXX</span>
+     </div>
+
+     <script>
+          // 1. 綁定 (bind)
+          // 現在 HTML 的 id 和這裡的 #名字 完全吻合了！
+          let myName = document.querySelector('#myName');
+          let myText = document.querySelector('#myText');
+          let myBtn = document.querySelector('#myBtn');
+          let mySpan = document.querySelector('#mySpan');
+
+          console.log('檢查綁定：', myName, myText, myBtn, mySpan);
+
+          // 2. 動作 (action)
+          myBtn.addEventListener('click', function () {
+               console.log('按鈕被點擊了！');
+
+               // ① 抓取使用者在輸入框「當下」打的字 (.value)
+               let getName = myName.value;
+               let getText = myText.value;
+               
+               // ⭕ 修正：將 console.log 改成檢查 getName 和 getText 變數
+               console.log('目前的輸入值：', getName, getText);
+
+               // ② 組成文字
+               let tmpText = `我是${getName} , 座右銘${getText}`;
+               console.log('組裝後的文字：', tmpText);
+
+               // ③ 顯示在 span 肚子裡
+               // 你用了 .innerText，這用法非常讚且安全！
+               mySpan.innerText = tmpText;
+          });
+     </script>
+</body>
+
+</html>

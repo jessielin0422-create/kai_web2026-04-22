@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>JS 基礎互動練習：座右銘產生器</title>
+     <style>
+          HTML
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>JS 基礎互動練習：極簡美學名片產生器</title>
+     <style>
+          /* 🌟 全域初始化與字體 */
+          * {
+               box-sizing: border-box;
+               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+          }
+
+          /* 🌟 網頁背景：改用柔和、高質感的微光漸層 */
+          body {
+               background: linear-gradient(135deg, #e0e8f5 0%, #f5f7fa 100%);
+               margin: 0;
+               padding: 0;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               min-height: 100vh; /* 讓整張卡片完美在螢幕正
+
+          /* 🌟 主卡片外框 */
+          .box {
+               width: 320px;
+               height: 380px;
+               background-color: #e3fafc; /* 溫柔的淺藍色底 */
+               margin: auto;
+               border-radius: 24px;
+               text-align: center;
+               padding: 30px 20px;
+               box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* 加上淡淡的陰影增加立體感 */
+          }
+
+          /* 🌟 輸入框美化 */
+          input[type="text"] {
+               width: 100%;
+               padding: 10px;
+               border: 1px solid #a5d8ff;
+               border-radius: 8px;
+               outline: none;
+               transition: 0.3s;
+               font-size: 14px;
+          }
+
+          /* 輸入框被點擊（聚焦）時的發光特效 */
+          input[type="text"]:focus {
+               border-color: #228be6;
+               box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.2);
+          }
+
+          /* 🌟 按鈕美化 */
+          .btn-primary {
+               width: 100%;
+               padding: 12px;
+               background-color: #228be6;
+               color: white;
+               border: none;
+               border-radius: 8px;
+               font-size: 16px;
+               font-weight: bold;
+               cursor: pointer;
+               transition: 0.2s;
+          }
+
+          /* 滑鼠移到按鈕上時：顏色變深、微微放大 */
+          .btn-primary:hover {
+               background-color: #1c7ed6;
+               transform: scale(1.02);
+          }
+
+          /* 🌟 顯示結果的文字區 */
+          .result-span {
+               display: block;
+               margin-top: 20px;
+               font-size: 15px;
+               color: #495057;
+               font-weight: bold;
+               line-height: 1.5;
+               word-break: break-all; /* 防止長文字爆框 */
+          }
+     </style>
+</head>
+
+<body>
+
+     <div class="box">
+          <p>
+               <input type="text" id="myName" value="kai" placeholder="請輸入名字...">
+          </p>
+          <p>
+               <input type="text" id="myText" value="全力以赴" placeholder="請輸入人生座右銘...">
+          </p>
+          <p>
+               <button type="button" id="myBtn" class="btn-primary">生成個人名片</button>
+          </p>
+
+          <span id="mySpan" class="result-span">我是XXX , 人生座右銘XXX</span>
+     </div>
+
+     <script>
+          // ==========================================
+          // 1. 綁定 (bind) —— 建立 JavaScript 與 HTML 的橋樑
+          // ==========================================
+          // 使用 querySelector 透過 ID (#) 把畫面上的元件一一抓進變數裡存著
+          let myName = document.querySelector('#myName');
+          let myText = document.querySelector('#myText');
+          let myBtn = document.querySelector('#myBtn');
+          let mySpan = document.querySelector('#mySpan');
+
+          // 【自我檢查】在瀏覽器按 F12 開啟 Console，可以看到綁定是否成功
+          console.log('【系統日誌】元件綁定成功：', { myName, myText, myBtn, mySpan });
+
+
+          // ==========================================
+          // 2. 動作 (action) —— 監聽使用者的行為
+          // ==========================================
+          // 當按鈕被「點擊 (click)」的那一瞬間，才會觸發 function 裡面的秘密任務
+          myBtn.addEventListener('click', function () {
+               console.log('【系統日誌】按鈕已被點擊，開始執行組裝任務！');
+
+               // 💡 步驟 ①：抓取 input 裡面「當下」被輸入的文字內容 (.value)
+               // (注意：必須寫在監聽器內部，這樣點擊時才能抓到最新輸入的值！)
+               let getName = myName.value;
+               let getText = myText.value;
+               console.log('【檢查輸入值】名字:', getName, ' / 座右銘:', getText);
+
+               // 💡 步驟 ②：使用 ES6 樣版字串 (Template Literals) 組成文字
+               // 語法：必須使用反單引號 ` `（鍵盤 Tab 上方），並用 ${變數} 將資料融進字串
+               // 概念等同於 PHP 中的雙引號字串插值: "我是 $getName"
+               let tmpText = `我是 ${getName} , 座右銘是：${getText}`;
+               console.log('【檢查成品】字串組裝完畢:', tmpText);
+
+               // 💡 步驟 ③：將組裝好的完美字串，塞進 span 標籤的肚子裡呈現 (.innerText)
+               // 使用 innerText 處理純文字，比 innerHTML 更安全，能有效防止惡意程式碼注入
+               mySpan.innerText = tmpText;
+          });
+     </script>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>JS 變數與樣版字串練習</title>
+
+     <style>
+          * {
+               box-sizing: border-box;
+          }
+
+          .box {
+               width: 300px;
+               height: 300px;
+               background-color: lightblue;
+               margin: auto;
+               border-radius: 30px;
+               text-align: center;
+               padding: 20px;
+          }
+     </style>
+</head>
+
+<body>
+     <div class="box">
+          <p>
+               <input type="text" id="name" placeholder="name...">
+          </p>
+          <p>
+               <input type="text" id="text" placeholder="text...">
+          </p>
+          <p>
+               <button type="button" id="myBtn">myBtn</button>
+          </p>
+
+          <span id="mySpan">123456</span>
+          <!-- 我是XXX , 我的人生座右銘XXX-->>
+
+
+     </div>
+
+
+
+     <script>
+          // 🌟 練習 1：宣告字串變數
+          // 想像一個名叫 x 的置物櫃，裡面塞入 'hello JS' 這串文字
+          let x = 'hello JS';
+          console.log('x', x); // 檢查置物櫃 x 裡面裝什麼。畫面會印出：x hello JS
+
+          // 🌟 練習 2：數字運算
+          // 讓電腦做數學題，把 1 + 2 的答案存進名為 sum 的置物櫃
+          let sum = 1 + 2;
+          console.log('sum', sum); // 畫面會印出數字：sum 3
+
+          // 🌟 練習 3：字串插值（秘密武器）
+          // 以前要把文字和變數拼在一起，要用很多加號（例如: "x => " + x），非常麻煩。
+          // 現代 JS 使用「反單引號 `」（鍵盤上 Tab 鍵上方那個點），
+          // 只要在字串裡寫 ${變數名稱}，變數就會像魔術一樣直接融合成文字！
+          let tmpText = `x => ${x}`;
+
+          // 把它印出來檢查看看
+          console.log('tmpText', tmpText); // 畫面會印出：x => hello JS
+
+     </script>
+</body>
+
+</html>
