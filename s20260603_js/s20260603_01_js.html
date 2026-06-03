@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>JS 基礎練習</title>
+</head>
+<body>
+
+     <h3>What Can JavaScript Do?</h3>
+
+     <p id="demo">JavaScript can change HTML content.</p>
+
+     <button type="button" onclick='
+          // 【秘密任務拆解】
+          // 1. document：意思是在「這整張網頁」裡面
+          // 2. getElementById("demo")：意思是「幫我抓出那個 id 叫作 demo 的標籤（就是上面的 p 標籤）」
+          // 3. .innerHTML：意思是「去動它肚子裡面的文字內容」
+          // 4. = "Hello JavaScript!"：意思是「把原本的字擦掉，換成這串新字」
+          document.getElementById("demo").innerHTML = "Hello JavaScript!"
+     '>
+          Click Me! </button>
+
+</body>
+</html>
