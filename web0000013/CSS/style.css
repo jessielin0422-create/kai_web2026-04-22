@@ -1,0 +1,75 @@
+* {
+     box-sizing: border-box;
+     /* 內容 大於表格時隱藏 */
+     overflow: hidden;
+}
+
+.heater {
+     width: 1024px;
+     height: 65px;
+     margin: auto;
+     /* background-color: lightblue; */
+
+     border: 1px solid black;
+     border-bottom: 0px;
+}
+
+.container {
+     width: 1024px;
+     height: calc(768px - 65px - 20px);
+     background-color: rgb(210, 138, 199);
+     margin: auto;
+     display: flex;
+}
+
+
+.container-left {
+     width: 215px;
+     height: calc(768px - 65px - 20px);
+     display: flex;
+     flex-direction: column;
+}
+
+.left-top {
+     height: calc(100% - 25px);
+     border: 1px solid black;
+
+}
+.menu-title{
+
+}
+.menu-container {
+
+}
+.menu {
+
+}
+
+.left-bottom update {
+
+}
+
+.container-right {
+     width: calc(100% - 215px);
+
+}
+
+.marquee {
+     height: 29px;
+     width: 770px;
+     font-family: "標楷體";
+     font-size: 24px;
+     color: #0000FF;
+}
+
+.right-top {}
+.right-bottom {}
+
+.footer {
+     width: 1024px;
+     height: 20px;
+     background-color: #0000FF;
+     margin: auto;
+     border: 1px solid black;
+     border-top: 0px;
+}
