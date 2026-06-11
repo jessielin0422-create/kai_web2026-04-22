@@ -59,16 +59,23 @@
 
                // setTimeout [function,時間(毫秒)] 時間到 執行function
                // function 在裡面 不用function name
+               //增加一個flag變數來判斷螢幕出現的是什麼狀態 幫助判讀
                setTimeout(function () {
                     if (isPink) {
                          box.setAttribute("class", "box bg-blue");
                          isPink = false;
                     } else {
                          box.setAttribute("class", "box bg-pink");
-                         isPink = ture;
+                         isPink = true;
                     }
-                    }, 1000);
+               }, 1000);
+
+               // 小練習題目?
+               // 1. 連續按下去 會一直新增 setInterval ?
+               // 2. stop 停止 setInterval ?
+
           });
+
 
      </script>
 </body>
