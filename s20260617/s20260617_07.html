@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>月花費預算控制計算機 - 歷史紀錄版</title>
+    <title>月花費預算控制計算機 - 各項獨立總額版</title>
     <style>
         /* 基礎樣式重設 */
         * {
@@ -23,10 +23,10 @@
             padding: 10px;
         }
 
-        /* 雙欄主容器寬度調整為 720px 以容納紀錄空間 */
+        /* 雙欄主容器寬度 */
         .main-wrapper {
             display: flex;
-            width: 720px;
+            width: 740px;
             max-width: 100%;
             gap: 12px;
             align-items: stretch;
@@ -53,16 +53,31 @@
             border: 1.5px solid #fbcfe8;
         }
 
-        /* 小標題 */
+        /* 升級版小標題：左右分開，右邊放各類別總額 */
         .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.85rem;
             font-weight: bold;
             color: #1e3a8a;
-            margin: 8px 0 4px 0;
+            margin: 8px 0 6px 0;
             padding-bottom: 2px;
             border-bottom: 1.5px solid #93c5fd;
         }
         .section-title:first-of-type { margin-top: 0; }
+        
+        /* 標題上的小計樣式 */
+        .category-sum {
+            font-size: 0.8rem;
+            background-color: #cbd5e1;
+            color: #1e293b;
+            padding: 1px 6px;
+            border-radius: 10px;
+        }
+        .sum-income { background-color: #bbf7d0; color: #166534; }
+        .sum-fixed { background-color: #bfdbfe; color: #1e40af; }
+        .sum-var { background-color: #fef08a; color: #854d0e; }
 
         /* 表單列排版 */
         .form-row {
@@ -128,7 +143,7 @@
             border-radius: 6px;
             cursor: pointer;
             width: 100%;
-            margin: 4px 0 8px 0;
+            margin: 3px 0 8px 0;
         }
         .btn-add:hover { background-color: #e2e8f0; }
 
@@ -199,14 +214,14 @@
             display: block;
         }
 
-        /* 💾 每月紀錄歷史欄位區 */
+        /* 歷史紀錄區 */
         .history-section {
             margin-top: 12px;
             border-top: 1px solid #fbcfe8;
             padding-top: 10px;
             display: flex;
             flex-direction: column;
-            flex: 1; /* 彈性填滿剩餘高度 */
+            flex: 1; 
         }
         .history-title {
             font-size: 0.85rem;
@@ -219,7 +234,7 @@
             border: 1px solid #fbcfe8;
             border-radius: 8px;
             flex: 1;
-            height: 110px; /* 限制高度，多出時會出現滾動條 */
+            height: 110px; 
             overflow-y: auto;
             padding: 5px;
         }
@@ -243,13 +258,22 @@
         <div class="box input-container">
             <h4 style="text-align: center; color: #1e3a8a; margin-bottom: 8px; font-size: 1rem;">📊 輸入每月花費</h4>
 
-            <div class="section-title">💵 每月收入</div>
-            <div class="form-row">
-                <label>每月薪資收入</label>
-                <input type="number" id="salary" value="50000">
+            <div class="section-title">
+                <span>💵 每月收入</span>
+                <span class="category-sum sum-income">總額: $<span id="leftIncomeSum">50,000</span></span>
             </div>
+            <div id="incomeContainer">
+                <div class="form-row">
+                    <label>每月薪資收入</label>
+                    <input type="number" class="income-input" value="50000">
+                </div>
+            </div>
+            <button type="button" class="btn-add" id="addIncomeBtn">➕ 增加自訂收入項目</button>
 
-            <div class="section-title">🔒 固定開銷 (每月硬支出)</div>
+            <div class="section-title">
+                <span>🔒 固定開銷 (每月硬支出)</span>
+                <span class="category-sum sum-fixed">總額: $<span id="leftFixedSum">20,000</span></span>
+            </div>
             <div id="fixedContainer">
                 <div class="form-row">
                     <label>住宿費 (房租/房貸)</label>
@@ -262,7 +286,10 @@
             </div>
             <button type="button" class="btn-add" id="addFixedBtn">➕ 增加自訂固定項目</button>
 
-            <div class="section-title">📉 變動與生活花費</div>
+            <div class="section-title">
+                <span>📉 變動與生活花費</span>
+                <span class="category-sum sum-var">總額: $<span id="leftVarSum">20,000</span></span>
+            </div>
             <div id="variableContainer">
                 <div class="form-row">
                     <label>餐費 (伙食與聚餐)</label>
@@ -298,7 +325,7 @@
             <h4 style="color: #9d174d; text-align: center; margin-bottom: 5px; font-size: 1rem;">📋 右側即時明細</h4>
             
             <div class="result-list">
-                <div class="result-item"><span>總薪資收入：</span><strong id="showSalary">$ 0 元</strong></div>
+                <div class="result-item"><span>總收入小計：</span><strong id="showSalary" style="color: #10b981;">$ 0 元</strong></div>
                 <div class="result-item"><span>固定開銷小計：</span><strong id="showFixed" style="color: #2563eb;">$ 0 元</strong></div>
                 <div class="result-item"><span>生活花費小計：</span><strong id="showVar" style="color: #d97706;">$ 0 元</strong></div>
             </div>
@@ -324,7 +351,40 @@
     <script>
         $(document).ready(function () {
             
-            // 1. 動態增加「固定開銷」欄位
+            // 核心功能：即時重新計算左側三大項目的「分類總額」
+            function updateLeftLiveSums() {
+                let incSum = 0;
+                let fixSum = 0;
+                let varSum = 0;
+
+                $('.income-input').each(function() { incSum += Number($(this).val()) || 0; });
+                $('.fixed-input').each(function() { fixSum += Number($(this).val()) || 0; });
+                $('.var-input').each(function() { varSum += Number($(this).val()) || 0; });
+
+                // 即時渲染至左側綠、藍、黃色的獨立標籤中
+                $('#leftIncomeSum').text(incSum.toLocaleString());
+                $('#leftFixedSum').text(fixSum.toLocaleString());
+                $('#leftVarSum').text(varSum.toLocaleString());
+            }
+
+            // 只要任何輸入框數字改變（打字或上下鍵），立刻更新左邊總額
+            $(document).on('input', 'input[type="number"]', function() {
+                updateLeftLiveSums();
+            });
+
+            // 1. 動態增加「每月收入」欄位
+            $('#addIncomeBtn').click(function() {
+                let newRow = `
+                    <div class="form-row">
+                        <input type="text" class="custom-label-input" placeholder="副業/外快項目">
+                        <input type="number" class="income-input" value="0">
+                        <button type="button" class="btn-del">×</button>
+                    </div>`;
+                $('#incomeContainer').append(newRow);
+                updateLeftLiveSums(); // 增加欄位後同步刷新
+            });
+
+            // 2. 動態增加「固定開銷」欄位
             $('#addFixedBtn').click(function() {
                 let newRow = `
                     <div class="form-row">
@@ -333,9 +393,10 @@
                         <button type="button" class="btn-del">×</button>
                     </div>`;
                 $('#fixedContainer').append(newRow);
+                updateLeftLiveSums();
             });
 
-            // 2. 動態增加「生活花費」欄位
+            // 3. 動態增加「生活花費」欄位
             $('#addVarBtn').click(function() {
                 let newRow = `
                     <div class="form-row">
@@ -344,28 +405,32 @@
                         <button type="button" class="btn-del">×</button>
                     </div>`;
                 $('#variableContainer').append(newRow);
+                updateLeftLiveSums();
             });
 
-            // 3. 點擊叉叉（X）刪除自訂欄位
+            // 4. 點擊叉叉（X）刪除自訂欄位
             $(document).on('click', '.btn-del', function() {
                 $(this).closest('.form-row').remove();
+                updateLeftLiveSums(); // 刪除欄位後同步刷新
             });
 
-            // 全域變數用來傳遞當前計算出來的最新純文字字串
+            // 全域變數用來傳遞最新紀錄純文字
             let currentResultText = "";
 
-            // 4. 點擊主按鈕執行計算
+            // 5. 點擊主按鈕執行公式運算
             $('#myBtn').click(function () {
-                let salary = Number($('#salary').val()) || 0;
+                let totalIncome = 0;
                 let totalFixed = 0;
                 let totalVariable = 0;
 
+                $('.income-input').each(function() { totalIncome += Number($(this).val()) || 0; });
                 $('.fixed-input').each(function() { totalFixed += Number($(this).val()) || 0; });
                 $('.var-input').each(function() { totalVariable += Number($(this).val()) || 0; });
 
                 let getOpt = $('#opt').val();
 
-                $('#showSalary').text(`$ ${salary.toLocaleString()} 元`);
+                // 更新右側面板明細
+                $('#showSalary').text(`$ ${totalIncome.toLocaleString()} 元`);
                 $('#showFixed').text(`$ ${totalFixed.toLocaleString()} 元`);
                 $('#showVar').text(`$ ${totalVariable.toLocaleString()} 元`);
 
@@ -373,9 +438,9 @@
 
                 switch (getOpt) {
                     case "all-minus":
-                        result = salary - totalFixed - totalVariable;
-                        $('#mySpanTitle').text('💰 當月薪資結餘：');
-                        currentResultText = `薪資結餘: $${result.toLocaleString()}元`;
+                        result = totalIncome - totalFixed - totalVariable;
+                        $('#mySpanTitle').text('💰 當月薪資結餘 (總收入 - 總支出)：');
+                        currentResultText = `結餘: $${result.toLocaleString()}元`;
                         $('#mySpan').text(`$ ${result.toLocaleString()} 元`);
                         break;
 
@@ -415,24 +480,22 @@
                 }
             });
 
-            // 5. 點擊「儲存本月紀錄」按鈕
+            // 6. 點擊「儲存本月紀錄」按鈕
             $('#saveLogBtn').click(function() {
-                // 自動獲取當下日期與時間 (格式: MM/DD HH:mm)
                 let now = new Date();
                 let timeStr = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
                 
-                // 組裝成一列歷史紀錄
                 let logRow = `
                     <div class="history-row">
                         <span class="history-date">[${timeStr}]</span>
                         <strong>${currentResultText}</strong>
                     </div>`;
                 
-                // 丟進歷史容器的最上方
                 $('#historyContainer').prepend(logRow);
             });
 
-            // 網頁一打開自動點擊計算一次
+            // 網頁一打開，初始化左側的即時分類總額與右側計算
+            updateLeftLiveSums();
             $('#myBtn').trigger('click');
         });
     </script>
