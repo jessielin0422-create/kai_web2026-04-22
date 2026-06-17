@@ -4,7 +4,7 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>小學數學 10 題挑戰與計算機（寶寶章升級版）</title>
+     <title>小學數學 5 題挑戰與計算機（完美一頁版）</title>
      <style>
           /* 基礎樣式重設 */
           * {
@@ -20,34 +20,37 @@
                display: flex;
                justify-content: center;
                align-items: center;
-               padding: 20px;
+               padding: 15px;
           }
 
-          /* 主包裝：左右雙欄佈局 */
+          /* 主包裝：確保雙欄並排不破版 */
           .main-wrapper {
                display: flex;
-               width: 950px;
+               width: 880px;
                max-width: 100%;
-               gap: 25px;
-               align-items: flex-start;
+               gap: 20px;
+               align-items: stretch; /* 讓左右兩邊卡片等高 */
           }
 
           /* 共通卡片樣式 */
           .card {
                background-color: #ffffff;
-               border-radius: 20px;
-               box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-               padding: 25px;
+               border-radius: 16px;
+               box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+               padding: 20px;
+               display: flex;
+               flex-direction: column;
           }
 
           /* ==================== 左邊：題目區 ==================== */
           .quiz-container {
-               flex: 1.4;
+               flex: 1.2; /* 設定比例 */
+               min-width: 420px; /* 防止題目區被擠壓變形 */
                border: 3px solid #3b82f6;
           }
 
           .quiz-title {
-               font-size: 1.5rem;
+               font-size: 1.3rem;
                color: #1e3a8a;
                margin-bottom: 10px;
                text-align: center;
@@ -58,91 +61,81 @@
           .stamp-book {
                background-color: #fffbeb;
                border: 2px dashed #f59e0b;
-               border-radius: 12px;
-               padding: 10px;
-               margin-bottom: 15px;
+               border-radius: 10px;
+               padding: 8px 10px;
+               margin-bottom: 10px;
                text-align: center;
           }
 
           .stamp-book-title {
-               font-size: 0.95rem;
+               font-size: 0.85rem;
                color: #b45309;
                font-weight: bold;
-               margin-bottom: 5px;
+               margin-bottom: 3px;
           }
 
           .stamp-container {
                display: flex;
-               gap: 8px;
+               gap: 6px;
                justify-content: center;
                flex-wrap: wrap;
-               min-height: 40px;
+               min-height: 32px;
                align-items: center;
           }
 
           .baby-stamp {
-               font-size: 1.8rem;
+               font-size: 1.6rem;
                animation: pop 0.3s ease-out forwards;
                display: inline-block;
           }
 
           @keyframes pop {
-               0% {
-                    transform: scale(0);
-               }
-
-               70% {
-                    transform: scale(1.3);
-               }
-
-               100% {
-                    transform: scale(1);
-               }
+               0% { transform: scale(0); }
+               70% { transform: scale(1.2); }
+               100% { transform: scale(1); }
           }
 
           .score-board {
                text-align: center;
-               font-size: 1.1rem;
+               font-size: 0.95rem;
                color: #2563eb;
                font-weight: bold;
-               margin-bottom: 15px;
+               margin-bottom: 12px;
                background-color: #eff6ff;
                padding: 8px;
-               border-radius: 10px;
+               border-radius: 8px;
           }
 
+          /* 5 題垂直整齊排列 */
           .quiz-list {
                display: flex;
                flex-direction: column;
-               gap: 10px;
-               max-height: 380px;
-               overflow-y: auto;
-               padding-right: 5px;
+               gap: 8px;
           }
 
           .quiz-item {
                display: flex;
                align-items: center;
                justify-content: space-between;
-               font-size: 1.2rem;
+               font-size: 1.1rem;
                font-weight: 600;
                padding: 8px 12px;
                background-color: #f8fafc;
-               border-radius: 10px;
+               border-radius: 8px;
+               border: 1px solid #e2e8f0;
           }
 
           .quiz-text {
                color: #334155;
-               flex: 1;
           }
 
           .quiz-item input {
-               width: 80px;
-               height: 35px;
+               width: 75px;
+               height: 30px;
                text-align: center;
-               font-size: 1.1rem;
-               border: 2px solid #cbd5e1;
-               border-radius: 10px;
+               font-size: 1.05rem;
+               border: 1px solid #cbd5e1;
+               border-radius: 6px;
                outline: none;
           }
 
@@ -151,65 +144,55 @@
           }
 
           .quiz-item .status {
-               width: 30px;
+               width: 25px;
                text-align: center;
-               font-size: 1.2rem;
-               margin-left: 10px;
+               font-size: 1.1rem;
+               margin-left: 5px;
           }
 
           .quiz-actions {
-               margin-top: 15px;
+               margin-top: auto; /* 自動推到卡片最底部 */
+               padding-top: 15px;
                display: flex;
                gap: 10px;
           }
 
           .btn {
                flex: 1;
-               height: 45px;
-               font-size: 1rem;
+               height: 40px;
+               font-size: 0.95rem;
                font-weight: bold;
                color: white;
                border: none;
-               border-radius: 25px;
+               border-radius: 20px;
                cursor: pointer;
                transition: background-color 0.2s;
           }
 
-          .btn-check {
-               background-color: #3b82f6;
-          }
-
-          .btn-check:hover {
-               background-color: #1d4ed8;
-          }
-
-          .btn-reset {
-               background-color: #64748b;
-          }
-
-          .btn-reset:hover {
-               background-color: #475569;
-          }
+          .btn-check { background-color: #3b82f6; }
+          .btn-check:hover { background-color: #1d4ed8; }
+          .btn-reset { background-color: #64748b; }
+          .btn-reset:hover { background-color: #475569; }
 
           /* ==================== 右邊：計算機 ==================== */
           .calc-container {
                flex: 1;
+               min-width: 320px; /* 防止計算機縮小 */
                border: 3px solid #ec4899;
                background-color: #fff1f2;
           }
 
           .calc-screen {
                width: 100%;
-               height: 50px;
+               height: 48px;
                background-color: #ffffff;
                border: 2px solid #fbcfe8;
-               border-radius: 12px;
+               border-radius: 10px;
                font-size: 1.3rem;
                font-weight: bold;
                color: #9d174d;
-               text-align: right;
-               padding: 0 15px;
-               margin-bottom: 15px;
+               padding: 0 12px;
+               margin-bottom: 12px;
                display: flex;
                align-items: center;
                justify-content: flex-end;
@@ -219,57 +202,46 @@
           .calc-grid {
                display: grid;
                grid-template-columns: repeat(4, 1fr);
-               gap: 10px;
+               gap: 8px;
           }
 
           .calc-btn {
-               height: 50px;
-               font-size: 1.2rem;
+               height: 46px;
+               font-size: 1.15rem;
                font-weight: bold;
                background-color: #ffffff;
                border: 1px solid #fbcfe8;
-               border-radius: 12px;
+               border-radius: 10px;
                cursor: pointer;
                color: #334155;
                transition: all 0.1s;
+               display: flex;
+               align-items: center;
+               justify-content: center;
           }
 
-          .calc-btn:hover {
-               background-color: #fce7f3;
-          }
-
-          .calc-btn:active {
-               transform: scale(0.95);
-          }
+          .calc-btn:hover { background-color: #fce7f3; }
+          .calc-btn:active { transform: scale(0.95); }
 
           .calc-btn.operator {
                background-color: #fbcfe8;
                color: #9d174d;
           }
-
-          .calc-btn.operator:hover {
-               background-color: #f9a8d4;
-          }
+          .calc-btn.operator:hover { background-color: #f9a8d4; }
 
           .calc-btn.clear {
                background-color: #fca5a5;
                color: #991b1b;
                grid-column: span 2;
           }
-
-          .calc-btn.clear:hover {
-               background-color: #f87171;
-          }
+          .calc-btn.clear:hover { background-color: #f87171; }
 
           .calc-btn.equal {
                background-color: #ec4899;
                color: white;
                grid-column: span 2;
           }
-
-          .calc-btn.equal:hover {
-               background-color: #db2777;
-          }
+          .calc-btn.equal:hover { background-color: #db2777; }
      </style>
 </head>
 
@@ -278,12 +250,12 @@
      <div class="main-wrapper">
 
           <div class="card quiz-container">
-               <div class="quiz-title">✏️ 數學 10 題小挑戰</div>
+               <div class="quiz-title">✏️ 數學 5 題小挑戰</div>
 
                <div class="stamp-book">
                     <div class="stamp-book-title">🏆 寶寶章收集本（全對就能得到一個喔！）</div>
                     <div class="stamp-container" id="stampContainer">
-                         <span style="color: #94a3b8; font-size: 0.9rem;" id="noStampText">目前還沒有圖章，加油！</span>
+                         <span style="color: #94a3b8; font-size: 0.8rem;" id="noStampText">目前還沒有圖章，加油！</span>
                     </div>
                </div>
 
@@ -340,20 +312,21 @@
 
                let currentQuestions = [];
                let calcExpression = "";
-               let totalStamps = 0;       // 記錄目前累積的寶寶章數量
-               let hasAwardedThisRound = false; // 防止同一回合重複點擊重複送章
+               let totalStamps = 0;       
+               let hasAwardedThisRound = false; 
 
-               function generateTenQuestions() {
+               // 🚀 修改為只生成 5 題
+               function generateQuestions() {
                     quizListEl.innerHTML = "";
                     currentQuestions = [];
-                    hasAwardedThisRound = false; // 新一輪重置送章狀態
+                    hasAwardedThisRound = false; 
                     scoreBoardEl.textContent = "請作答後點擊下方「檢查答案」";
                     scoreBoardEl.style.color = "#2563eb";
                     scoreBoardEl.style.backgroundColor = "#eff6ff";
 
                     const opts = ['+', '-', '*'];
 
-                    for (let i = 0; i < 10; i++) {
+                    for (let i = 0; i < 5; i++) {
                          let opt = opts[Math.floor(Math.random() * opts.length)];
                          let num1, num2, ans;
 
@@ -376,10 +349,10 @@
                          let item = document.createElement('div');
                          item.className = 'quiz-item';
                          item.innerHTML = `
-                        <span class="quiz-text">第 ${i + 1} 題： &nbsp; ${num1} ${displayOpt} ${num2} = </span>
-                        <input type="number" class="quiz-input" id="input-${i}" autocomplete="off">
-                        <span class="status" id="status-${i}"></span>
-                    `;
+                             <span class="quiz-text">第 ${i + 1} 題： &nbsp; ${num1} ${displayOpt} ${num2} = </span>
+                             <input type="number" class="quiz-input" id="input-${i}" autocomplete="off">
+                             <span class="status" id="status-${i}"></span>
+                         `;
                          quizListEl.appendChild(item);
                     }
                }
@@ -402,27 +375,25 @@
                          }
                     });
 
-                    let totalScore = correctCount * 10;
+                    // 🚀 每題改為 20 分
+                    let totalScore = correctCount * 20;
                     scoreBoardEl.textContent = `檢查完畢！你答對了 ${correctCount} 題，總得分：${totalScore} 分！`;
 
-                    // 判斷是否 100 分且此回合尚未給過章
                     if (totalScore === 100) {
                          scoreBoardEl.style.color = "#15803d";
                          scoreBoardEl.style.backgroundColor = "#dcfce7";
                          scoreBoardEl.textContent += " 🎉 滿分！獲得一個寶寶章！";
 
                          if (!hasAwardedThisRound) {
-                              // 隱藏「目前沒有圖章」的提示字
                               if (noStampText) noStampText.style.display = "none";
 
-                              // 創建一個新的寶寶章並放進收集盒
                               let stampSpan = document.createElement('span');
                               stampSpan.className = 'baby-stamp';
                               stampSpan.textContent = '👶';
                               stampContainer.appendChild(stampSpan);
 
                               totalStamps++;
-                              hasAwardedThisRound = true; // 鎖定，這回合不能再拿更多章了
+                              hasAwardedThisRound = true; 
                          }
                     } else {
                          scoreBoardEl.style.color = "#b91c1c";
@@ -430,7 +401,7 @@
                     }
                });
 
-               resetQuizBtn.addEventListener('click', generateTenQuestions);
+               resetQuizBtn.addEventListener('click', generateQuestions);
 
                // 計算機邏輯
                calcButtons.forEach(button => {
@@ -467,7 +438,7 @@
                     });
                });
 
-               generateTenQuestions();
+               generateQuestions();
           });
      </script>
 
