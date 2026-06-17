@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月花費預算控制計算機 - 歷史紀錄版</title>
+    <style>
+        /* 基礎樣式重設 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* 雙欄主容器寬度調整為 720px 以容納紀錄空間 */
+        .main-wrapper {
+            display: flex;
+            width: 720px;
+            max-width: 100%;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .box {
+            border-radius: 14px;
+            padding: 15px;
+            flex: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 左邊：輸入區藍色 */
+        .input-container {
+            background-color: #e0f2fe; 
+            border: 1.5px solid #bae6fd;
+        }
+
+        /* 右邊：輸出區粉紅色 */
+        .output-container {
+            background-color: #fce7f3; 
+            border: 1.5px solid #fbcfe8;
+        }
+
+        /* 小標題 */
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin: 8px 0 4px 0;
+            padding-bottom: 2px;
+            border-bottom: 1.5px solid #93c5fd;
+        }
+        .section-title:first-of-type { margin-top: 0; }
+
+        /* 表單列排版 */
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            gap: 5px;
+        }
+
+        .form-row label {
+            font-weight: 500;
+            color: #334155;
+            font-size: 0.85rem;
+        }
+
+        /* 自訂項目的文字輸入框 */
+        .custom-label-input {
+            width: 50%;
+            height: 26px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            padding: 0 5px;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        /* 數字輸入框 */
+        input[type="number"] {
+            width: 40%;
+            height: 26px;
+            border-radius: 6px;
+            text-align: right;
+            padding-right: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        input[type="number"]:focus { border-color: #3b82f6; }
+
+        /* 刪除項目小按鈕 */
+        .btn-del {
+            background-color: #fee2e2;
+            color: #ef4444;
+            border: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .btn-del:hover { background-color: #fca5a5; }
+
+        /* ➕ 增加欄位按鈕 */
+        .btn-add {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+            padding: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin: 4px 0 8px 0;
+        }
+        .btn-add:hover { background-color: #e2e8f0; }
+
+        /* 下拉選單 */
+        select {
+            text-align: center;
+            width: 100%;
+            height: 32px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border: 1px solid #cbd5e1;
+            margin: 10px 0 8px 0;
+            outline: none;
+        }
+
+        /* 按鈕基礎樣式 */
+        .btn-main {
+            width: 100%;
+            height: 34px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-blue { background-color: #2563eb; margin-top: auto; }
+        .btn-blue:hover { background-color: #1d4ed8; }
+        
+        .btn-green { background-color: #10b981; margin-top: 8px; }
+        .btn-green:hover { background-color: #059669; }
+
+        /* 右側明細與結果樣式 */
+        .result-list {
+            width: 100%;
+            text-align: left;
+            margin-top: 5px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dashed #f472b6;
+            color: #4c0519;
+            font-size: 0.85rem;
+        }
+        
+        .result-total-box {
+            margin-top: 10px;
+            background-color: white;
+            border: 1px solid #fbcfe8;
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+        }
+        .total-title {
+            font-size: 0.75rem;
+            color: #9d174d;
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+        #mySpan {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #9d174d;
+            display: block;
+        }
+
+        /* 💾 每月紀錄歷史欄位區 */
+        .history-section {
+            margin-top: 12px;
+            border-top: 1px solid #fbcfe8;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            flex: 1; /* 彈性填滿剩餘高度 */
+        }
+        .history-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #9d174d;
+            margin-bottom: 5px;
+        }
+        .history-container {
+            background-color: #fff;
+            border: 1px solid #fbcfe8;
+            border-radius: 8px;
+            flex: 1;
+            height: 110px; /* 限制高度，多出時會出現滾動條 */
+            overflow-y: auto;
+            padding: 5px;
+        }
+        .history-row {
+            font-size: 0.75rem;
+            color: #650e2d;
+            padding: 4px 2px;
+            border-bottom: 1px dotted #fbcfe8;
+            display: flex;
+            justify-content: space-between;
+        }
+        .history-row:last-child { border-bottom: none; }
+        .history-date { color: #888; }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="box input-container">
+            <h4 style="text-align: center; color: #1e3a8a; margin-bottom: 8px; font-size: 1rem;">📊 輸入每月花費</h4>
+
+            <div class="section-title">💵 每月收入</div>
+            <div class="form-row">
+                <label>每月薪資收入</label>
+                <input type="number" id="salary" value="50000">
+            </div>
+
+            <div class="section-title">🔒 固定開銷 (每月硬支出)</div>
+            <div id="fixedContainer">
+                <div class="form-row">
+                    <label>住宿費 (房租/房貸)</label>
+                    <input type="number" class="fixed-input" value="15000">
+                </div>
+                <div class="form-row">
+                    <label>孝親費</label>
+                    <input type="number" class="fixed-input" value="5000">
+                </div>
+            </div>
+            <button type="button" class="btn-add" id="addFixedBtn">➕ 增加自訂固定項目</button>
+
+            <div class="section-title">📉 變動與生活花費</div>
+            <div id="variableContainer">
+                <div class="form-row">
+                    <label>餐費 (伙食與聚餐)</label>
+                    <input type="number" class="var-input" value="9000">
+                </div>
+                <div class="form-row">
+                    <label>交通費 (通勤/油資)</label>
+                    <input type="number" class="var-input" value="2000">
+                </div>
+                <div class="form-row">
+                    <label>小孩花費 (學費/雜支)</label>
+                    <input type="number" class="var-input" value="6000">
+                </div>
+                <div class="form-row">
+                    <label>生活雜費 (日用品/水電)</label>
+                    <input type="number" class="var-input" value="3000">
+                </div>
+            </div>
+            <button type="button" class="btn-add" id="addVarBtn">➕ 增加自訂生活項目</button>
+
+            <select name="opt" id="opt">
+                <option value="all-minus">📊 計算「薪資扣除所有開銷」結餘</option>
+                <option value="+">➕ 計算「固定開銷 ＋ 生活花費」總支出</option>
+                <option value="-">➖ 計算「固定開銷 － 生活花費」差額</option>
+                <option value="*">✖ 計算「固定開銷 × 生活花費」</option>
+                <option value="/">➗ 計算「固定開銷 ÷ 生活花費」比值</option>
+            </select>
+
+            <button type="button" class="btn-main btn-blue" id="myBtn">開始計算並更新右側</button>
+        </div>
+
+        <div class="box output-container">
+            <h4 style="color: #9d174d; text-align: center; margin-bottom: 5px; font-size: 1rem;">📋 右側即時明細</h4>
+            
+            <div class="result-list">
+                <div class="result-item"><span>總薪資收入：</span><strong id="showSalary">$ 0 元</strong></div>
+                <div class="result-item"><span>固定開銷小計：</span><strong id="showFixed" style="color: #2563eb;">$ 0 元</strong></div>
+                <div class="result-item"><span>生活花費小計：</span><strong id="showVar" style="color: #d97706;">$ 0 元</strong></div>
+            </div>
+            
+            <div class="result-total-box">
+                <div id="mySpanTitle" class="total-title">計算結果</div>
+                <span id="mySpan">請點擊左側按鈕</span>
+            </div>
+
+            <button type="button" class="btn-main btn-green" id="saveLogBtn">💾 儲存本月紀錄欄位</button>
+
+            <div class="history-section">
+                <div class="history-title">🗓️ 歷史儲存紀錄：</div>
+                <div class="history-container" id="historyContainer">
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            
+            // 1. 動態增加「固定開銷」欄位
+            $('#addFixedBtn').click(function() {
+                let newRow = `
+                    <div class="form-row">
+                        <input type="text" class="custom-label-input" placeholder="填寫項目">
+                        <input type="number" class="fixed-input" value="0">
+                        <button type="button" class="btn-del">×</button>
+                    </div>`;
+                $('#fixedContainer').append(newRow);
+            });
+
+            // 2. 動態增加「生活花費」欄位
+            $('#addVarBtn').click(function() {
+                let newRow = `
+                    <div class="form-row">
+                        <input type="text" class="custom-label-input" placeholder="填寫項目">
+                        <input type="number" class="var-input" value="0">
+                        <button type="button" class="btn-del">×</button>
+                    </div>`;
+                $('#variableContainer').append(newRow);
+            });
+
+            // 3. 點擊叉叉（X）刪除自訂欄位
+            $(document).on('click', '.btn-del', function() {
+                $(this).closest('.form-row').remove();
+            });
+
+            // 全域變數用來傳遞當前計算出來的最新純文字字串
+            let currentResultText = "";
+
+            // 4. 點擊主按鈕執行計算
+            $('#myBtn').click(function () {
+                let salary = Number($('#salary').val()) || 0;
+                let totalFixed = 0;
+                let totalVariable = 0;
+
+                $('.fixed-input').each(function() { totalFixed += Number($(this).val()) || 0; });
+                $('.var-input').each(function() { totalVariable += Number($(this).val()) || 0; });
+
+                let getOpt = $('#opt').val();
+
+                $('#showSalary').text(`$ ${salary.toLocaleString()} 元`);
+                $('#showFixed').text(`$ ${totalFixed.toLocaleString()} 元`);
+                $('#showVar').text(`$ ${totalVariable.toLocaleString()} 元`);
+
+                let result = 0;
+
+                switch (getOpt) {
+                    case "all-minus":
+                        result = salary - totalFixed - totalVariable;
+                        $('#mySpanTitle').text('💰 當月薪資結餘：');
+                        currentResultText = `薪資結餘: $${result.toLocaleString()}元`;
+                        $('#mySpan').text(`$ ${result.toLocaleString()} 元`);
+                        break;
+
+                    case "+":
+                        result = totalFixed + totalVariable;
+                        $('#mySpanTitle').text('🧾 每月總開銷支出：');
+                        currentResultText = `總支出: $${result.toLocaleString()}元`;
+                        $('#mySpan').text(`$ ${result.toLocaleString()} 元`);
+                        break;
+
+                    case "-":
+                        result = totalFixed - totalVariable;
+                        $('#mySpanTitle').text('⚖️ 兩大開銷相減差額：');
+                        currentResultText = `開銷差額: $${result.toLocaleString()}元`;
+                        $('#mySpan').text(`$ ${result.toLocaleString()} 元`);
+                        break;
+
+                    case "*":
+                        result = totalFixed * totalVariable;
+                        $('#mySpanTitle').text('✖️ 開銷相乘乘積：');
+                        currentResultText = `乘積: ${result.toLocaleString()}`;
+                        $('#mySpan').text(`${result.toLocaleString()}`);
+                        break;
+
+                    case "/":
+                        if(totalVariable === 0) {
+                            $('#mySpanTitle').text('❌ 計算錯誤：');
+                            $('#mySpan').text('生活花費不能為 0');
+                            currentResultText = "計算錯誤";
+                        } else {
+                            result = Math.round((totalFixed / totalVariable) * 100) / 100;
+                            $('#mySpanTitle').text('➗ 固定/生活花費比值：');
+                            currentResultText = `花費比值: ${result}`;
+                            $('#mySpan').text(`${result}`);
+                        }
+                        break;
+                }
+            });
+
+            // 5. 點擊「儲存本月紀錄」按鈕
+            $('#saveLogBtn').click(function() {
+                // 自動獲取當下日期與時間 (格式: MM/DD HH:mm)
+                let now = new Date();
+                let timeStr = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                
+                // 組裝成一列歷史紀錄
+                let logRow = `
+                    <div class="history-row">
+                        <span class="history-date">[${timeStr}]</span>
+                        <strong>${currentResultText}</strong>
+                    </div>`;
+                
+                // 丟進歷史容器的最上方
+                $('#historyContainer').prepend(logRow);
+            });
+
+            // 網頁一打開自動點擊計算一次
+            $('#myBtn').trigger('click');
+        });
+    </script>
+
+</body>
+
+</html>
