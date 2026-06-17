@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豪華版工程計算機</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 計算機主主體 */
+        .calculator {
+            width: 320px;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 顯示螢幕 */
+        .screen {
+            width: 100%;
+            height: 80px;
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            font-size: 2.5rem;
+            box-sizing: border-box;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            /* 讓超長數字可以縮小或隱藏 */
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* 按鈕區域：使用 Grid 網格佈局 */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        /* 按鈕基本樣式 */
+        button {
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, filter 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.92);
+        }
+
+        /* 數字按鈕樣式 */
+        .btn-num {
+            background-color: #555;
+            color: white;
+        }
+
+        /* 功能按鈕樣式 (C, back) */
+        .btn-func {
+            background-color: #a5a5a5;
+            color: black;
+        }
+
+        /* 運算子按鈕樣式 (+, -, *, /, =) */
+        .btn-opt {
+            background-color: #ff9f0a;
+            color: white;
+        }
+
+        /* 讓 0 按鈕變寬 */
+        .btn-zero {
+            grid-column: span 2;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <div class="screen" id="display">0</div>
+
+        <div class="buttons">
+            <button class="btn-func" data-type="clear">C</button>
+            <button class="btn-func" data-type="back">⌫</button>
+            <button class="btn-opt" data-type="opt" data-val="/">÷</button>
+            <button class="btn-opt" data-type="opt" data-val="*">×</button>
+
+            <button class="btn-num" data-type="num" data-val="7">7</button>
+            <button class="btn-num" data-type="num" data-val="8">8</button>
+            <button class="btn-num" data-type="num" data-val="9">9</button>
+            <button class="btn-opt" data-type="opt" data-val="-">-</button>
+
+            <button class="btn-num" data-type="num" data-val="4">4</button>
+            <button class="btn-num" data-type="num" data-val="5">5</button>
+            <button class="btn-num" data-type="num" data-val="6">6</button>
+            <button class="btn-opt" data-type="opt" data-val="+">+</button>
+
+            <button class="btn-num" data-type="num" data-val="1">1</button>
+            <button class="btn-num" data-type="num" data-val="2">2</button>
+            <button class="btn-num" data-type="num" data-val="3">3</button>
+            <button class="btn-opt" data-type="equal">=</button>
+
+            <button class="btn-num btn-zero" data-type="num" data-val="0">0</button>
+            <button class="btn-num" data-type="num" data-val=".">.</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            const display = $('#display');
+            
+            // 用來記錄計算狀態的變數
+            let currentInput = '0';  // 當前螢幕顯示的字串
+            let num1 = null;         // 第一個數字
+            let opt = null;          // 儲存運算子 (+
