@@ -58,14 +58,14 @@
 <body>
 
     <div class="container">
-        <div class="box fadeInBtn">
-            fadeIn
+        <div class="box slideDownBtn">
+            slideDown
         </div>
-        <div class="box fadeOutBtn">
-            fadeOut
+        <div class="box slideUpBtn">
+            slideUp
         </div>
-        <div class="box fadeToggleBtn">
-            fadeToggle
+        <div class="box slideToggleBtn">
+            slideToggle
         </div>
     </div>
     <div class="output-container">
@@ -83,30 +83,30 @@
         // jauery 寫code
         $(document).ready(function () {
             // 1. bind
-            const fadeInBtn = $('.fadeInBtn');
-            const fadeOutBtn = $('.fadeOutBtn');
-            const fadeToggleBtn = $('.fadeToggleBtn');
+            const slideDownBtn = $('.slideDownBtn');
+            const slideUpBtn = $('.slideUpBtn');
+            const slideToggleBtn = $('.slideToggleBtn');
             const outputContainer = $('.output-container');
 
             // 2.action
 
-            // fadeInBtn click
-            fadeInBtn.click(function (e) {
+            // slideDownBtn click
+            slideDownBtn.click(function (e) {
                 // e.preventDefault();
-                outputContainer.fadeIn();
+                outputContainer.slideDown();
             });
 
-            // fadeOutBtn click
-            fadeOutBtn.click(function (e) {
+            // slideUpBtn click
+            slideUpBtn.click(function (e) {
                 // e.preventDefault();
-                outputContainer.fadeOut();
+                outputContainer.slideUpBtn();
             });
 
 
-            // fadeToggleBtn click
-            fadeToggleBtn.click(function (e) {
+            // slideToggleBtn click
+            slideToggleBtn.click(function (e) {
                 // e.preventDefault();
-                outputContainer.fadeToggle();
+                outputContainer.slideToggleBtn();
             });
 
         });
