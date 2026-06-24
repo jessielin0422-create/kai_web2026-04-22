@@ -24,3 +24,15 @@ $data = [
     ]
 ];
 dd($data);
+
+// dd($data)
+
+// echo "abc";
+
+$data = [
+    'myString' => 'abc',
+    'myTime' => '11:00'
+];
+
+// dd($data);
+echo json_encode($data);
