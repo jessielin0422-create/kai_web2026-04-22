@@ -56,36 +56,40 @@
             // 1.按下submit
             myForm.submit(function (e){
                 // form submit 擋住
-             e.preventDefault();
+             e.preventDefault();  //禁止表單送出
              consolo.log('myForm submit ok');
              consolo.log('this',this);
              consolo.log('$(this)', $(this));
+             // jquery get form data
+             // 2.data = form data
              let data = $(this).serialize();
              consolo.log('data', data);
 
-             // jquery get form data
-
-            });
-            // 2.data = form data
-            // 3.ajax to php
-            // 4.get res
-            // 5.res show output
-
+              // 3.ajax to php
             let url = './s20260625_01_calc_data.php';
             $.ajax({
                 type: "get",
                 url: url,
-                // data: "data",
+                data: data,
                 dataType: "json",
                 success: function (res) {
                     consolo.log('res',res);
                     console.log('res typeof', typeof (res));
 
-
                 }
+
+            });
+             // 3.ajax to php
+
+
+            
+            // 4.get res
+            // 5.res show output
+
+                
             });
 
-        });
+        
     </script>
 </body>
 
