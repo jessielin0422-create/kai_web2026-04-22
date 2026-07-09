@@ -8,24 +8,336 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .h1 {
-            font-family: "標楷體";
-            font-size: 24px;
+        body {
+            font-family: "Microsoft JhengHei", sans-serif;
+
+            background:
+                linear-gradient(135deg,
+                    #f7f4ef,
+                    #efe5da,
+                    #e5d4c4);
+
+            min-height: 100vh;
+
+            position: relative;
+        }
+
+        /* 漂浮鏡片 */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            left: -120px;
+            top: 80px;
+
+            background:
+                rgba(255, 255, 255, .15);
+
+            backdrop-filter: blur(10px);
+
+            border:
+                2px solid rgba(255, 255, 255, .35);
+
+            animation:
+                floatLens 15s infinite ease-in-out;
+
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            right: -80px;
+            top: 180px;
+
+            background:
+                rgba(255, 255, 255, .12);
+
+            backdrop-filter: blur(10px);
+
+            border:
+                2px solid rgba(255, 255, 255, .3);
+
+            animation:
+                floatLens 18s infinite ease-in-out;
+
+            z-index: -1;
+        }
+
+        @keyframes floatLens {
+
+            0% {
+                transform:
+                    translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-30px) rotate(8deg);
+            }
+
+            100% {
+                transform:
+                    translateY(0px) rotate(0deg);
+            }
+        }
+
+        /* 主容器 */
+
+        .container {
+
+            background:
+                rgba(255, 255, 255, .82);
+
+            backdrop-filter: blur(15px);
+
+            border-radius: 30px;
+
+            padding: 35px;
+
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .08);
+        }
+
+        /* 標題 */
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+
+            color: #8A3B2A;
+
             font-weight: bold;
         }
 
-        .h2 {
-            font-family: "標楷體";
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
+        /* 卡片 */
+
+        .card {
+
+            border: none;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, .08);
+
+            margin-bottom: 25px;
         }
 
-        .h3 {
-            font-family: "標楷體";
-            font-size: 36px;
+        .card-header {
+
+            background:
+                linear-gradient(90deg,
+                    #B5523C,
+                    #D0735A);
+
+            color: white;
+
             font-weight: bold;
-            text-align: center;
+
+            border: none;
+        }
+
+        /* Label */
+
+        label {
+
+            font-weight: 600;
+
+            color: #5b463d;
+        }
+
+        /* Input */
+
+        .form-control,
+        .form-select {
+
+            border-radius: 15px;
+
+            border:
+                1px solid #ddd;
+
+            padding: 12px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: #B5523C;
+
+            box-shadow:
+                0 0 0 .2rem rgba(181, 82, 60, .15);
+        }
+
+        /* Radio */
+
+        .form-check-input:checked {
+
+            background-color: #B5523C;
+            border-color: #B5523C;
+        }
+
+        /* Checkbox */
+
+        input[type="checkbox"]:checked {
+
+            accent-color: #B5523C;
+        }
+
+        /* 區塊標題 */
+
+        .section-title {
+
+            font-size: 22px;
+
+            color: #8A3B2A;
+
+            border-left:
+                6px solid #B5523C;
+
+            padding-left: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        /* 表格 */
+
+        table {
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        table th {
+
+            background: #F7EFE7;
+
+            color: #8A3B2A;
+        }
+
+        table td {
+
+            vertical-align: middle;
+        }
+
+        /* 按鈕 */
+
+        .btn-primary {
+
+            background: #B5523C;
+
+            border: none;
+
+            border-radius: 15px;
+
+            padding: 12px 25px;
+
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+
+            background: #9b4431;
+        }
+
+        .btn-success {
+
+            border-radius: 15px;
+        }
+
+        .btn-danger {
+
+            border-radius: 15px;
+        }
+
+        /* 送出按鈕 */
+
+        .submit-btn {
+
+            background:
+                linear-gradient(90deg,
+                    #B5523C,
+                    #D0735A);
+
+            border: none;
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            padding: 15px;
+
+            border-radius: 20px;
+
+            width: 100%;
+        }
+
+        /* 進度條 */
+
+        .progress {
+
+            height: 15px;
+
+            border-radius: 20px;
+
+            background: #f3e6dc;
+        }
+
+        .progress-bar {
+
+            background:
+                linear-gradient(90deg,
+                    #B5523C,
+                    #D0735A);
+        }
+
+        /* 手機版 */
+
+        @media(max-width:768px) {
+
+            .container {
+
+                padding: 20px;
+                margin: 15px;
+            }
+
+            h1,
+            h2,
+            h3 {
+
+                font-size: 1.5rem;
+            }
+
+            .card {
+
+                border-radius: 18px;
+            }
         }
     </style>
 </head>
@@ -124,7 +436,7 @@
                 <div class="col-12 col-sm-6">
                     <div class="mb-3 mt-3">
                         <label for="phoneInput" class="form-label">
-                            聯絡電話 Contact number <span class="text-danger">*</span>：
+                            <span class="text-danger">*</span>聯絡電話 Contact number：
                         </label>
 
                         <div class="input-group">
@@ -640,8 +952,8 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3 mt-3">
-                            <label for="file">其他資料補充：</label>
-                            <input type="file" class="form-control" id="file" placeholder="Enter name" name="name">
+                            <label for="file">其他資料補充 Additional information：</label>
+                            <input type="file" class="form-control" id="file" placeholder="請輸入其他補充資料說明..." name="name">
                         </div>
                     </div>
                 </div>
@@ -651,7 +963,7 @@
                         <!-- textarea -->
                         <div class="mb-3 mt-3">
                             <label for="comment">其他留言與備註 Comments：</label>
-                            <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" placeholder="請輸入其他留言與備註..." name="text"></textarea>
                         </div>
                     </div>
                 </div>
