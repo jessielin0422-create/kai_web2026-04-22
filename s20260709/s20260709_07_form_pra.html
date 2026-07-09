@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>顧客基本資料及專業驗光紀錄</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,25 +20,60 @@
             font-weight: bold;
             text-align: center;
         }
+
+        .h3 {
+            font-family: "標楷體";
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <!-- header -->
-    <div class="container mt-3">
-        <div class="h1">禾 米 眼 鏡 <br> HOME-OPTICAL</div>
-        <div class="h2">顧 客 資 料 表 <br> Customer Information Form</div>
 
+
+    <!-- header 一 -->
+    <div class="container mt-3">
         <!-- input text / number / date / radio / checkbox / select / file /  textarea / reset / button / submit  -->
         <form action="/action_page.php">
+
+            <div class="h1">禾 米 眼 鏡 <br> HOME-OPTICAL</div>
+
+            <div class="col-12">
+                <div class="card border-primary bg-light mb-4 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 fs-1 text-primary">
+                                👓
+                            </div>
+                            <div>
+                                <h5 class="card-title text-primary fw-bold mb-1">
+                                    您好！歡迎光臨本合格驗光所(北市衛萬驗光 字第 5Y01190024 號)
+                                </h5>
+                                <p class="card-text text-muted mb-0" style="font-size: 0.95rem;">
+                                    為了保障您的眼睛健康與消費權益，今日由國家考核通過的合格
+                                    <strong class="text-dark bg-warning px-2 py-0.5 rounded">驗光師：Danny</strong>
+                                    為您提供專業的視力檢查與配鏡諮詢服務。在開始驗光前，請先協助我們填寫以下基本資料，謝謝您的配合！
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-2 pt-2 border-top border-2 border-white d-flex flex-wrap gap-2">
+                            <span class="badge bg-success"><i class="bi bi-patch-check"></i> 衛福部考試合格</span>
+                            <span class="badge bg-secondary">專任驗光師執業中</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <!-- select -->
                 <div class="col-12 col-sm-6">
                     <label for="sel1" class="form-label">合格驗光師 Optometrist：</label>
                     <select class="form-select" id="sel1" name="sellist1">
-                        <option>Danny</option>
-                        <option>2</option>
+                        <option value="Danny">Danny</option>
+                        <option value="2">2</option>
                     </select>
                 </div>
                 <div class="col-12 col-sm-6">
@@ -48,9 +83,10 @@
                         <input type="date" class="form-control" id="name" placeholder="年/月/日 YYYY-MM-DD" name="name">
                     </div>
                 </div>
-
             </div>
-
+            <br>
+            <br>
+            <div class="h2">顧 客 資 料 表 <br> Patient Information </div>
             <!-- text -->
             <div class="row">
                 <div class="col-12 col-sm-6">
@@ -79,18 +115,57 @@
 
                 <div class="col-12 col-sm-6">
                     <div class="mb-3 mt-3">
-                        <label for="name"><span class="text-danger">*</span>生日 Date of Birth：</label>
+                        <label for="name"><span class="text-danger">*</span>出生日期 Date of Birth：</label>
                         <input type="date" class="form-control" id="name" placeholder="生日 Date of Birth" name="name">
                     </div>
                 </div>
 
-
+                <!-- 聯絡電話 開始 -->
                 <div class="col-12 col-sm-6">
                     <div class="mb-3 mt-3">
-                        <label for="name"><span class="text-danger">*</span>聯絡電話 Contact number：</label>
-                        <input type="text" class="form-control" id="name" placeholder="聯絡電話 Contact number" name="name">
+                        <label for="phoneInput" class="form-label">
+                            聯絡電話 Contact number <span class="text-danger">*</span>：
+                        </label>
+
+                        <div class="input-group">
+                            <select class="form-select" id="phoneType" style="max-width: 120px;"
+                                onchange="handlePhoneTypeChange()">
+                                <option value="mobile" selected>手機</option>
+                                <option value="landline">市話</option>
+                            </select>
+
+                            <input type="tel" class="form-control" id="phoneInput" placeholder="請輸入手機號碼（例：0912345678）"
+                                name="user_phone" required maxlength="10" pattern="09[0-9]{8}"
+                                title="電話格式錯誤！必須為 09 開頭的 10 位純數字"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '');" autocomplete="off">
+                        </div>
                     </div>
                 </div>
+
+                <script>
+                    function handlePhoneTypeChange() {
+                        const phoneType = document.getElementById('phoneType').value;
+                        const phoneInput = document.getElementById('phoneInput');
+
+                        // 清空使用者已經輸入的內容，避免格式錯亂
+                        phoneInput.value = '';
+
+                        if (phoneType === 'mobile') {
+                            // 切換為手機格式
+                            phoneInput.placeholder = '請輸入手機號碼（例：0912345678）';
+                            phoneInput.maxLength = 10;
+                            phoneInput.pattern = '09[0-9]{8}';
+                            phoneInput.title = '電話格式錯誤！必須為 09 開頭的 10 位純數字';
+                        } else {
+                            // 切換為市話格式 (台灣市話包含區碼，總長度約為 9 到 10 碼，例如 0223456789 或 042345678)
+                            phoneInput.placeholder = '請包含區碼，勿填符號（例：0223456789）';
+                            phoneInput.maxLength = 10;
+                            phoneInput.pattern = '0[2-8][0-9]{7,8}';
+                            phoneInput.title = '市話格式錯誤！請包含區碼（如02），且總長度應為 9 或 10 位純數字';
+                        }
+                    }
+                </script>
+                <!-- 聯絡電話 結束-->
 
                 <!-- 職業 開始-->
                 <div class="col-12 col-sm-6">
@@ -132,18 +207,68 @@
                 </script>
                 <!-- 職業 結束-->
 
+                <!-- 身分證字號 開始 -->
                 <div class="col-12 col-sm-6">
                     <div class="mb-3 mt-3">
-                        <label for="name">身分證字號 ID No.：</label>
-                        <input type="text" class="form-control" id="name" placeholder="身分證字號 ID No." name="name">
+                        <label for="idNumberInput" class="form-label">
+                            身分證字號 ID No.：
+                        </label>
+
+                        <input type="text" class="form-control" id="idNumberInput" placeholder="請輸入身分證字號（例：A123456789）"
+                            name="user_id_no" required maxlength="10" list="idLetterHints" pattern="[A-Z][1-2][0-9]{8}"
+                            title="身分證字號格式錯誤！必須為 1 碼英文大寫 + 9 碼數字（共 10 碼）" style="text-transform: uppercase;"
+                            oninput="this.value = this.value.toUpperCase();" autocomplete="off">
+
+                        <datalist id="idLetterHints">
+                            <option value="A">A（臺北市）</option>
+                            <option value="B">B（臺中市）</option>
+                            <option value="C">C </option>
+                            <option value="D">D </option>
+                            <option value="E">E </option>
+                            <option value="F">F（新北市）</option>
+                            <option value="G">G </option>
+                            <option value="H">H </option>
+                            <option value="I">I </option>
+                            <option value="J">J </option>
+                            <option value="K">K </option>
+                            <option value="L">L </option>
+                            <option value="M">M </option>
+                            <option value="N">N </option>
+                            <option value="O">O </option>
+                            <option value="P">P </option>
+                            <option value="Q">Q </option>
+                            <option value="R">R </option>
+                            <option value="S">S </option>
+                            <option value="T">T </option>
+                            <option value="U">U </option>
+                            <option value="V">V </option>
+                            <option value="W">W </option>
+                            <option value="X">X </option>
+                            <option value="Y">Y </option>
+                            <option value="Z">Z </option>
+                        </datalist>
                     </div>
                 </div>
+                <!-- 身分證字號 結束 -->
+
                 <div class="col-12 col-sm-6">
                     <div class="mb-3 mt-3">
-                        <label for="name">聯絡信箱 Email：</label>
-                        <input type="text" class="form-control" id="name" placeholder="聯絡信箱 Email" name="name">
+                        <label for="emailInput" class="form-label">聯絡信箱 Email：</label>
+
+                        <input type="email" class="form-control" id="emailInput" placeholder="例如：example@gmail.com"
+                            name="user_email" list="emailExtensions" required autocomplete="off">
+
+                        <datalist id="emailExtensions">
+                            <option value="@gmail.com"></option>
+                            <option value="@yahoo.com.tw"></option>
+                            <option value="@hotmail.com"></option>
+                            <option value="@outlook.com"></option>
+                            <option value="@icloud.com"></option>
+                        </datalist>
                     </div>
                 </div>
+                <!-- 信箱 結束 -->
+
                 <!-- 聯絡地址 開始 -->
                 <div class="col-12">
                     <div class="mb-3 mt-3">
@@ -254,99 +379,299 @@
                     }
                 </script>
                 <!-- 聯絡地址 結束 -->
-
-
-
-
-            </div>
-            <!-- text end -->
-
-
-
-            <!-- radio -->
-            <div class="row">
-                <div class="col-12 col-sm-6">
-                    <label for="sel1" class="form-label">Radio list (select one):</label>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"
-                            checked>
-                        <label class="form-check-label" for="radio1">Option 1</label>
+                <!-- 監護人聯絡方式 開始-->
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <div class="mb-3 mt-3">
+                            <label for="name">監護人中文姓名 Full name：(是未成年子女需填寫)</label>
+                            <input type="text" class="form-control" id="name" placeholder="監護人中文姓名 Full name"
+                                name="name">
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
-                        <label class="form-check-label" for="radio2">Option 2</label>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="mb-3 mt-3">
+                            <label for="phoneInput" class="form-label">
+                                聯絡電話 Contact number <span class="text-danger">*</span>：
+                            </label>
+
+                            <div class="input-group">
+                                <select class="form-select" id="phoneType" style="max-width: 120px;"
+                                    onchange="handlePhoneTypeChange()">
+                                    <option value="mobile" selected>手機</option>
+                                    <option value="landline">市話</option>
+                                </select>
+
+                                <input type="tel" class="form-control" id="phoneInput"
+                                    placeholder="請輸入手機號碼（例：0912345678）" name="user_phone" required maxlength="10"
+                                    pattern="09[0-9]{8}" title="電話格式錯誤！必須為 09 開頭的 10 位純數字"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" autocomplete="off">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" disabled>
-                        <label class="form-check-label">Option 3</label>
+
+                    <script>
+                        function handlePhoneTypeChange() {
+                            const phoneType = document.getElementById('phoneType').value;
+                            const phoneInput = document.getElementById('phoneInput');
+
+                            // 清空使用者已經輸入的內容，避免格式錯亂
+                            phoneInput.value = '';
+
+                            if (phoneType === 'mobile') {
+                                // 切換為手機格式
+                                phoneInput.placeholder = '請輸入手機號碼（例：0912345678）';
+                                phoneInput.maxLength = 10;
+                                phoneInput.pattern = '09[0-9]{8}';
+                                phoneInput.title = '電話格式錯誤！必須為 09 開頭的 10 位純數字';
+                            } else {
+                                // 切換為市話格式 (台灣市話包含區碼，總長度約為 9 到 10 碼，例如 0223456789 或 042345678)
+                                phoneInput.placeholder = '請包含區碼，勿填符號（例：0223456789）';
+                                phoneInput.maxLength = 10;
+                                phoneInput.pattern = '0[2-8][0-9]{7,8}';
+                                phoneInput.title = '市話格式錯誤！請包含區碼（如02），且總長度應為 9 或 10 位純數字';
+                            }
+                        }
+                    </script>
+                    <!-- 監護人聯絡方式 結束-->
+
+
+                    <!-- header 二 -->
+
+                    <div class="h3">醫 療 與 用 眼 習 慣<br>Health & Ocular History</div>
+
+                    <!-- 問題1 開始--> <!-- checkbox --> <!-- radio -->
+                    <div class="col-12 col-sm-6">
+                        <div class="mb-3 mt-3">
+                            <label class="form-label">目前是否配戴眼鏡/隱形眼鏡 Current Prescription：</label>
+
+                            <!-- YES / NO 單選鈕 (預設勾選 NO) -->
+                            <div class="d-flex gap-3 mb-2">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="prescYes" name="has_prescription"
+                                        value="Y" onchange="togglePrescriptionLogic()">
+                                    <label class="form-check-label" for="prescYes">YES</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="prescNo" name="has_prescription"
+                                        value="N" onchange="togglePrescriptionLogic()" checked>
+                                    <label class="form-check-label" for="prescNo">NO</label>
+                                </div>
+                            </div>
+
+                            <!-- ========================================== -->
+                            <!-- 【延伸一】選 YES 顯示：配戴種類 與 客製化換鏡動機 -->
+                            <!-- ========================================== -->
+                            <div id="prescriptionDetails" class="d-none border rounded p-3 bg-light mt-2">
+                                <!-- 1. 種類複選 -->
+                                <label class="form-label small text-primary fw-bold">1. 請勾選目前配戴的種類 (可複選)：</label>
+                                <div class="form-check mb-2">
+                                    <input type="checkbox" class="form-check-input" id="typeGlasses" name="presc_type"
+                                        value="glasses">
+                                    <label class="form-check-label" for="typeGlasses">框架眼鏡 Glasses</label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="typeContacts" name="presc_type"
+                                        value="contacts">
+                                    <label class="form-check-label" for="typeContacts">隱形眼鏡 Contact Lenses</label>
+                                </div>
+
+                                <!-- 2. 動機複選 -->
+                                <label class="form-label small text-primary fw-bold">2. 請問您本次想換/配鏡的原因是？(可複選)：</label>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonFrame"
+                                        name="yes_presc_reason" value="change_frame">
+                                    <label class="form-check-label" for="yesReasonFrame">想更換現有的鏡框 Want to change
+                                        frame</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonLens"
+                                        name="yes_presc_reason" value="change_lenses">
+                                    <label class="form-check-label" for="yesReasonLens">想更換現有的鏡片 Want to change
+                                        lenses</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonTooLong"
+                                        name="yes_presc_reason" value="too_old">
+                                    <label class="form-check-label" for="yesReasonTooLong">現有眼鏡戴太久了，想做定期汰換 Worn for too
+                                        long</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonBlurry"
+                                        name="yes_presc_reason" value="vision_change">
+                                    <label class="form-check-label" for="yesReasonBlurry">最近度數改變、感覺看不清楚 Blurry
+                                        vision</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonFatigue"
+                                        name="yes_presc_reason" value="eye_fatigue">
+                                    <label class="form-check-label" for="yesReasonFatigue">眼睛容易疲倦、酸澀 Eye fatigue</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonFashion"
+                                        name="yes_presc_reason" value="fashion_match">
+                                    <label class="form-check-label" for="yesReasonFashion">想要變換造型 / 日常穿搭搭配 Change style
+                                        & Fashion</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="yesReasonOther"
+                                        name="yes_presc_reason" value="other" onchange="toggleYesOtherInput()">
+                                    <label class="form-check-label" for="yesReasonOther">其他原因 Others</label>
+                                </div>
+                                <!-- YES 的其他原因輸入框 -->
+                                <input type="text" class="form-control form-control-sm mt-2 d-none"
+                                    id="yesOtherReasonText" name="yes_presc_reason_other" placeholder="請簡述您的更換原因...">
+                            </div>
+
+                            <!-- ========================================== -->
+                            <!-- 【延伸二】選 NO 顯示：配鏡原因 -->
+                            <!-- ========================================== -->
+                            <div id="noPrescriptionReason" class="d-none border rounded p-3 bg-light mt-2">
+                                <label class="form-label small text-success fw-bold">請問您本次想配鏡的原因是？(可複選)：</label>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="reasonFirst"
+                                        name="no_presc_reason" value="first_time">
+                                    <label class="form-check-label" for="reasonFirst">我是初次配鏡 First time getting
+                                        glasses</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="reasonBlurry"
+                                        name="no_presc_reason" value="blurry">
+                                    <label class="form-check-label" for="reasonBlurry">最近突然覺得看不清楚 Blurry vision
+                                        recently</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="reasonFashion"
+                                        name="no_presc_reason" value="fashion">
+                                    <label class="form-check-label" for="reasonFashion">日常穿搭/造型配件需要 Fashion &
+                                        Style</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="reasonOther"
+                                        name="no_presc_reason" value="other" onchange="toggleNoOtherInput()">
+                                    <label class="form-check-label" for="reasonOther">其他原因 Others</label>
+                                </div>
+                                <!-- NO 的其他原因輸入框 -->
+                                <input type="text" class="form-control form-control-sm mt-2 d-none"
+                                    id="noOtherReasonText" name="no_presc_reason_other" placeholder="請簡述您的原因...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========================================== -->
+                    <!-- JavaScript 控制腳本 (置於 body 底部或現有 script 標籤內) -->
+                    <!-- ========================================== -->
+                    <script>
+                        // 核心：處理 YES / NO 調查區塊雙向切換與背景資料抹除
+                        function togglePrescriptionLogic() {
+                            const yesRadio = document.getElementById('prescYes');
+                            const detailsSection = document.getElementById('prescriptionDetails');
+                            const noReasonSection = document.getElementById('noPrescriptionReason');
+
+                            // 抓取區塊內所有輸入控制項以利切換時自動清空
+                            const yesInputs = detailsSection.querySelectorAll('input');
+                            const noInputs = noReasonSection.querySelectorAll('input');
+
+                            if (yesRadio.checked) {
+                                // 選 YES：顯示 YES 區塊、隱藏 NO 區塊
+                                detailsSection.classList.remove('d-none');
+                                noReasonSection.classList.add('d-none');
+
+                                // 抹除並隱藏 NO 區塊內先前填寫的暫存資料
+                                noInputs.forEach(input => {
+                                    if (input.type === 'checkbox') input.checked = false;
+                                    if (input.type === 'text') { input.value = ''; input.classList.add('d-none'); }
+                                });
+                            } else {
+                                // 選 NO：隱藏 YES 區塊、顯示 NO 區塊
+                                detailsSection.classList.add('d-none');
+                                noReasonSection.classList.remove('d-none');
+
+                                // 抹除並隱藏 YES 區塊內先前填寫的暫存資料
+                                yesInputs.forEach(input => {
+                                    if (input.type === 'checkbox') input.checked = false;
+                                    if (input.type === 'text') { input.value = ''; input.classList.add('d-none'); }
+                                });
+                            }
+                        }
+
+                        // 控制 YES 區塊的「其他原因」文字輸入框顯隱
+                        function toggleYesOtherInput() {
+                            const yesReasonOther = document.getElementById('yesReasonOther');
+                            const yesOtherReasonText = document.getElementById('yesOtherReasonText');
+                            if (yesReasonOther.checked) {
+                                yesOtherReasonText.classList.remove('d-none');
+                            } else {
+                                yesOtherReasonText.classList.add('d-none');
+                                yesOtherReasonText.value = '';
+                            }
+                        }
+
+                        // 控制 NO 區塊的「其他原因」文字輸入框顯隱
+                        function toggleNoOtherInput() {
+                            const reasonOther = document.getElementById('reasonOther');
+                            const noOtherReasonText = document.getElementById('noOtherReasonText');
+                            if (reasonOther.checked) {
+                                noOtherReasonText.classList.remove('d-none');
+                            } else {
+                                noOtherReasonText.classList.add('d-none');
+                                noOtherReasonText.value = '';
+                            }
+                        }
+
+                        // 網頁全部載入完成時，立刻跑一次初始化，確保初始畫面結構正常
+                        document.addEventListener("DOMContentLoaded", function () {
+                            togglePrescriptionLogic();
+                        });
+                    </script>
+                    <!-- 問題1 結束-->
+
+                    <!-- 問題2 開始-->
+                    <!-- 問題2 結束-->
+
+                    <!-- 問題3 開始-->
+                    <!-- 問題3 結束-->
+
+
+                </div>
+
+
+                <!-- file -->
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 mt-3">
+                            <label for="file">其他資料補充：</label>
+                            <input type="file" class="form-control" id="file" placeholder="Enter name" name="name">
+                        </div>
                     </div>
                 </div>
 
-                <!-- checkbox -->
-                <div class="col-12 col-sm-6">
-
-                    <label for="sel1" class="form-label">CheckBox list (select):</label>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
-                            checked>
-                        <label class="form-check-label" for="check1">Option 1</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">
-                        <label class="form-check-label" for="check2">Option 2</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" disabled>
-                        <label class="form-check-label">Option 3</label>
+                <div class="row">
+                    <div class="col">
+                        <!-- textarea -->
+                        <div class="mb-3 mt-3">
+                            <label for="comment">其他留言 Comments：</label>
+                            <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="row">
-                <div class="col">
-                    <!-- select -->
-                    <label for="sel1" class="form-label">配鏡用途 Purpose of Glasses/Usage：</label>
-                    <select class="form-select" id="sel1" name="sellist1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <!-- file -->
-                    <div class="mb-3 mt-3">
-                        <label for="file">File:</label>
-                        <input type="file" class="form-control" id="file" placeholder="Enter name" name="name">
+                <div class="row">
+                    <div class="col">
+                        <button type="reset" class="btn btn-primary">重置 Reset</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">提交 Submit</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <!-- textarea -->
-                    <div class="mb-3 mt-3">
-                        <label for="comment">Comments:</label>
-                        <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col">
-                    <button type="reset" class="btn btn-primary">Reset</button>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
         </form>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 </body>
 
