@@ -1,0 +1,186 @@
+html<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驗光前顧客用眼習慣預檢表</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- 引入 Bootstrap Icons 圖示庫 -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #f4f7f6; 
+            font-family: "Helvetica Neue", Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif; 
+        }
+        .form-container { 
+            max-width: 850px; 
+            background: #ffffff; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08); 
+        }
+        .section-title { 
+            border-left: 5px solid #0d6efd; 
+            padding-left: 12px; 
+            margin-top: 2rem; 
+            margin-bottom: 1.25rem; 
+            color: #0d6efd; 
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .form-check-label {
+            cursor: pointer;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <div class="form-container p-4 p-md-5 mx-auto">
+        
+        <!-- 表單標頭 -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark mb-3">
+                <i class="bi bi-eye-fill text-primary me-2"></i>驗光前顧客用眼習慣預檢表
+            </h2>
+            <p class="text-muted fs-6">親愛的顧客您好！為了提供您最精準、舒適的視力檢查與處方，請協助填寫以下即時資訊：</p>
+        </div>
+
+        <!-- 表單本體 -->
+        <form id="preExamForm" class="needs-validation" novalidate>
+            
+            <!-- 一、 顧客基本資料 -->
+            <div class="section-title"><i class="bi bi-person-vcard me-2"></i>一、 顧客基本資料</div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="custName" class="form-label fw-semibold">顧客姓名 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control form-control-lg" id="custName" required placeholder="請輸入姓名">
+                    <div class="invalid-feedback">請輸入顧客姓名。</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="custPhone" class="form-label fw-semibold">聯絡電話 <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control form-control-lg" id="custPhone" required placeholder="例如：0912345678">
+                    <div class="invalid-feedback">請輸入正確的電話號碼。</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="custBirthday" class="form-label fw-semibold">出生日期 <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="custBirthday" required>
+                    <div class="invalid-feedback">請選擇出生日期。</div>
+                </div>
+            </div>
+
+            <!-- 二、 本次配鏡目的 -->
+            <div class="section-title"><i class="bi bi-glasses me-2"></i>二、 本次配鏡目的</div>
+            <div class="mb-2">
+                <label class="form-label fw-semibold d-block mb-3">1. 請問您這次配鏡主要預計在什麼場合使用？（可複選）</label>
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-check p-2 border rounded bg-light ps-4">
+                            <input class="form-check-input" type="checkbox" name="purpose" id="purpose1" value="全天日常配戴">
+                            <label class="form-check-label d-block text-dark" for="purpose1">全天日常配戴（看遠看近）</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-check p-2 border rounded bg-light ps-4">
+                            <input class="form-check-input" type="checkbox" name="purpose" id="purpose2" value="辦公學習專用">
+                            <label class="form-check-label d-block text-dark" for="purpose2">辦公/學習專用（看電腦/書）</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-check p-2 border rounded bg-light ps-4">
+                            <input class="form-check-input" type="checkbox" name="purpose" id="purpose3" value="駕駛專用">
+                            <label class="form-check-label d-block text-dark" for="purpose3">駕駛專用（開車/騎車）</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-check p-2 border rounded bg-light ps-4">
+                            <input class="form-check-input" type="checkbox" name="purpose" id="purpose4" value="戶外休閒運動">
+                            <label class="form-check-label d-block text-dark" for="purpose4">戶外休閒 / 運動</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="form-check p-2 border rounded bg-light ps-4">
+                            <input class="form-check-input" type="checkbox" name="purpose" id="purpose5" value="穿搭配件造型">
+                            <label class="form-check-label d-block text-dark" for="purpose5">穿搭配件 / 平光造型</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 三、 日常用眼習慣 -->
+            <div class="section-title"><i class="bi bi-clock-history me-2"></i>三、 日常用眼習慣</div>
+            <div class="row g-3">
+                <div class="col-md-12 mb-2">
+                    <label for="useTime" class="form-label fw-semibold">2. 您平均一天使用 3C 產品（電腦、手機、平板）的時間大約多久？</label>
+                    <select class="form-select form-select-lg" id="useTime" required>
+                        <option value="" selected disabled>請選擇每日用眼時間</option>
+                        <option value="3小時以下">3 小時以下</option>
+                        <option value="3-6小時">3 ~ 6 小時</option>
+                        <option value="6-10小時">6 ~ 10 小時</option>
+                        <option value="10小時以上">10 小時以上（重度 3C 族）</option>
+                    </select>
+                    <div class="invalid-feedback">請選擇用眼時間。</div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <label for="restHabit" class="form-label fw-semibold">3. 在連續用眼過程中，您通常多久會讓眼睛放鬆休息？</label>
+                    <select class="form-select form-select-lg" id="restHabit" required>
+                        <option value="" selected disabled>請選擇休息放鬆習慣</option>
+                        <option value="30分鐘內">持續用眼 30 分鐘內就會休息</option>
+                        <option value="1-2小時">持續用眼 1 ~ 2 小時才休息</option>
+                        <option value="2小時以上">持續用眼 2 小時以上，直到眼睛酸才休息</option>
+                        <option value="無固定習慣">幾乎沒有固定休息的習慣</option>
+                    </select>
+                    <div class="invalid-feedback">請選擇放鬆習慣。</div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <label for="sleepTime" class="form-label fw-semibold">4. 您每天平均大約幾點入睡？</label>
+                    <select class="form-select form-select-lg" id="sleepTime" required>
+                        <option value="" selected disabled>請選擇平時入睡時間</option>
+                        <option value="11點前">晚上 11:00 以前</option>
+                        <option value="11點-1點">晚上 11:00 ~ 凌晨 01:00</option>
+                        <option value="1點後">凌晨 01:00 之後</option>
+                        <option value="不固定">因工作需輪班，睡眠作息不固定</option>
+                    </select>
+                    <div class="invalid-feedback">請選擇入睡時間。</div>
+                </div>
+            </div>
+
+            <!-- 四、 隱形眼鏡配戴習慣 -->
+            <div class="section-title"><i class="bi bi-shield-shaded me-2"></i>四、 隱形眼鏡配戴習慣</div>
+            <div class="mb-3">
+                <label for="contactHabit" class="form-label fw-semibold">5. 請問您平時的視力矯正配戴習慣是？</label>
+                <select class="form-select form-select-lg" id="contactHabit" required>
+                    <option value="" selected disabled>請選擇配戴習慣</option>
+                    <option value="只戴眼鏡">只配戴普通眼鏡</option>
+                    <option value="只戴隱眼">只配戴隱形眼鏡</option>
+                    <option value="兩者交替">眼鏡 與 隱形眼鏡 兩者常交替配戴</option>
+                </select>
+                <div class="invalid-feedback">請選擇平時配戴習慣。</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold d-block mb-2">6. 今天來驗光前，您有配戴隱形眼鏡嗎？</label>
+                <div class="p-3 border rounded bg-light">
+                    <div class="form-check form-check-inline me-4">
+                        <input class="form-check-input" type="radio" name="todayContact" id="todayNo" value="今天沒有配戴" checked>
+                        <label class="form-check-label fw-bold text-success" for="todayNo">
+                            <i class="bi bi-check-circle"></i> 沒有配戴
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="todayContact" id="todayYes" value="今天有配戴">
+                        <label class="form-check-label fw-bold text-warning" for="todayYes">
+                            <i class="bi bi-exclamation-triangle"></i> 有配戴（需於現場摘除並稍作休息）
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 五、 眼睛自覺症狀與病史 -->
+            <div class="section-title"><i class="bi bi-heart-pulse me-2"></i>五、 眼睛自覺症狀與病史</div>
+            <div class="mb-4">
+                <label class="form-label fw-semibold d-block mb-3">7. 您最近是否有感覺到以下眼睛疲勞或不適的症狀？（可複選）</label>
+                <div class="row g-2">
