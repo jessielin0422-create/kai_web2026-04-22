@@ -1,0 +1,126 @@
+html<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie 同意視窗範例</title>
+    <style>
+        /* 頁面基本樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        /* Cookie 彈出視窗主體 */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            padding: 15px 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            /* 預設隱藏，由 JavaScript 控制顯示 */
+            display: none; 
+        }
+
+        /* 提示文字樣式 */
+        .cookie-text {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-right: 20px;
+        }
+
+        /* 按鈕群組 */
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 按鈕基本樣式 */
+        .cookie-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* 同意按鈕（醒目） */
+        .btn-accept {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* 拒絕按鈕（低調） */
+        .btn-reject {
+            background-color: #555;
+            color: #ddd;
+        }
+
+        /* 滑鼠懸停效果 */
+        .cookie-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>歡迎來到我的網站</h1>
+    <p>這是一頁測試 Cookie 彈出視窗的範例網頁。</p>
+
+    <!-- Cookie 彈出視窗 HTML 結構 -->
+    <div id="cookieBanner" class="cookie-banner">
+        <div class="cookie-text">
+            本網站使用 Cookie 以提升您的瀏覽體驗。繼續瀏覽即表示您同意我們使用 Cookie。
+        </div>
+        <div class="cookie-buttons">
+            <button id="btnReject" class="cookie-btn btn-reject">拒絕</button>
+            <button id="btnAccept" class="cookie-btn btn-accept">同意</button>
+        </div>
+    </div>
+
+    <script>
+        // 當網頁載入完成後執行
+        document.addEventListener("DOMContentLoaded", function () {
+            const banner = document.getElementById("cookieBanner");
+            const btnAccept = document.getElementById("btnAccept");
+            const btnReject = document.getElementById("btnReject");
+
+            // 檢查瀏覽器的 localStorage 是否已有紀錄
+            const cookieConsent = localStorage.getItem("cookieConsent");
+
+            // 如果沒有紀錄，就顯示彈出視窗
+            if (!cookieConsent) {
+                banner.style.display = "flex";
+            }
+
+            // 使用者點擊「同意」
+            btnAccept.addEventListener("click", function () {
+                // 在 localStorage 儲存紀錄，設定為 "accepted"
+                localStorage.setItem("cookieConsent", "accepted");
+                // 隱藏視窗
+                banner.style.display = "none";
+            });
+
+            // 使用者點擊「拒絕」
+            btnReject.addEventListener("click", function () {
+                // 在 localStorage 儲存紀錄，設定為 "rejected"
+                localStorage.setItem("cookieConsent", "rejected");
+                // 隱藏視窗
+                banner.style.display = "none";
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -44,7 +44,8 @@
           /* 🎯 導覽列滑鼠移過去中英文智慧切換 */
           .nav-link .tw-text {
                display: none;
-               color: #0dcaf0; /* 亮眼的水藍色提示 */
+               color: #0dcaf0;
+               /* 亮眼的水藍色提示 */
           }
 
           .nav-link:hover .en-text {
@@ -159,7 +160,7 @@
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
           <div class="container-fluid">
                <a href="javascript:void(0)">
-                    <img src="./image/01brand logo.png" class="navbar-brand-logo" alt="Logo">
+                    <img src="./images/01brand logo.png" class="navbar-brand-logo" alt="Logo">
                </a>
                <a class="navbar-brand" title="禾米眼鏡" href="javascript:void(0)">禾 米 眼 鏡
                     <br>
@@ -172,68 +173,59 @@
 
                <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                         <li class="nav-item">
-                              <a class="nav-link" href="javascript:void(0)">
+                         <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                    <span class="en-text">關於禾米</span>
-                                   <span class="tw-text">ABOUT</span>
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="javascript:void(0)">
-                                   <span class="en-text">服務項目</span>
-                                   <span class="tw-text">SERVICE</span>
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="javascript:void(0)">
-                                   <span class="en-text">最新消息</span>
-                                   <span class="tw-text">NEWS</span>
-                              </a>
-                         </li>
-
-                         <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                   <span class="en-text">禾米生活</span>
-                                   <span class="tw-text">BLOG</span>
                               </a>
                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">眼睛知識</a></li>
-                                   <li><a class="dropdown-item" href="#">國際展覽</a></li>
+                                   <li><a class="dropdown-item" href="#">最新消息</a></li>
                                    <li><a class="dropdown-item" href="#">品牌公司到訪</a></li>
+                                   <li><a class="dropdown-item" href="#">參加展覽</a></li>
+                                   <li><a class="dropdown-item" href="#">與禾米聯繫</a></li>
                               </ul>
                          </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="javascript:void(0)">
-                                   <span class="en-text">眼鏡品牌</span>
-                                   <span class="tw-text">BRAND</span>
-                              </a>
-                         </li>
-                         <li class="nav-item">
-                              <a class="nav-link" href="javascript:void(0)">
-                                   <span class="en-text">與禾米聯繫</span>
-                                   <span class="tw-text">CONTACT</span>
-                              </a>
-                         </li>
-
                          <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                   <span class="en-text">購物趣</span>
-                                   <span class="tw-text">SHOP</span>
+                                   <span class="en-text">服務項目</span>
                               </a>
                               <ul class="dropdown-menu">
-                                   <li><a class="dropdown-item" href="#">鏡框</a></li>
-                                   <li><a class="dropdown-item" href="#">鏡片</a></li>
-                                   <li><a class="dropdown-item" href="#">隱形眼鏡</a></li>
+                                   <li><a class="dropdown-item" href="#">驗光檢查</a></li>
+                                   <li><a class="dropdown-item" href="#">鏡片品牌</a></li>
+                                   <li><a class="dropdown-item" href="#">鏡框品牌</a></li>
+                                   <li><a class="dropdown-item" href="#">隱形眼鏡品牌</a></li>
+                                   <li><a class="dropdown-item" href="#">線上購物</a></li>
+                              </ul>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link text-info fw-bold" data-bs-toggle="modal"
+                                   data-bs-target="#optometryModal">
+                                   <span class="en-text">預約驗光</span>
+                              </a>
+                         </li>
+                         <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                   <span class="en-text">服務保固</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                   <li><a class="dropdown-item" href="#">清潔</a></li>
+                                   <li><a class="dropdown-item" href="#">保養</a></li>
+                              </ul>
+                         </li>
+                         <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                   <span class="en-text">專業知識庫</span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                   <li><a class="dropdown-item" href="#">視覺保健指南</a></li>
+                                   <li><a class="dropdown-item" href="#">驗光師的護眼處方</a></li>
+                                   <li><a class="dropdown-item" href="#">鏡片保養學問</a></li>
+                                   <li><a class="dropdown-item" href="#">隱形眼鏡配戴指南</a></li>
+                                   <li><a class="dropdown-item" href="#">常見問題（FAQ）</a></li>
                               </ul>
                          </li>
 
-                         <li class="nav-item">
-                              <a class="nav-link text-info fw-bold" data-bs-toggle="modal" data-bs-target="#optometryModal">
-                                   <span class="en-text">預約驗光</span>
-                                   <span class="tw-text">OPTOMETRY</span>
-                              </a>
-                         </li>
-                         
+
+
                          <!-- 🎯 會員登入：修改為與其他按鈕完全統一的格式 -->
                          <li class="nav-item">
                               <a class="nav-link text-info fw-bold" href="./login.html">
@@ -270,19 +262,19 @@
 
           <div class="carousel-inner">
                <div class="carousel-item active">
-                    <img src="./image/01.jpg" alt="禾米空間" class="d-block custom-carousel-img">
+                    <img src="./images/01.jpg" alt="禾米空間" class="d-block custom-carousel-img">
                </div>
                <div class="carousel-item">
-                    <img src="./image/02.jpg" alt="精選鏡框" class="d-block custom-carousel-img">
+                    <img src="./images/02.jpg" alt="精選鏡框" class="d-block custom-carousel-img">
                </div>
                <div class="carousel-item">
-                    <img src="./image/03.jpg" alt="專業驗光" class="d-block custom-carousel-img">
+                    <img src="./images/03.jpg" alt="專業驗光" class="d-block custom-carousel-img">
                </div>
                <div class="carousel-item">
-                    <img src="./image/04.jpg" alt="專業驗光" class="d-block custom-carousel-img">
+                    <img src="./images/04.jpg" alt="專業驗光" class="d-block custom-carousel-img">
                </div>
                <div class="carousel-item">
-                    <img src="./image/05.jpg" alt="專業驗光" class="d-block custom-carousel-img">
+                    <img src="./images/05.jpg" alt="專業驗光" class="d-block custom-carousel-img">
                </div>
           </div>
 
@@ -294,14 +286,122 @@
           </button>
      </div>
 
+     <!-- container1 -->
+     <div class="container mt-5">
+          <div class="row">
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/30/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/31/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/32/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!-- container1 end -->
+
+     <br><br>
+     <hr><br><br>
+
+     <!-- container2 -->
+     <div class="container mt-5">
+          <div class="row">
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/30/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/31/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-12 col-sm-4 mt-3">
+                    <h2>Card Image</h2>
+                    <p>Image at the top (card-img-top):</p>
+                    <div class="card">
+                         <img class="card-img-top img-fluid" src="https://picsum.photos/id/32/400/300" alt="Card image"
+                              style="width:100%">
+                         <div class="card-body">
+                              <h4 class="card-title">John Doe</h4>
+                              <p class="card-text">Some example text some example text. John Doe is an architect and
+                                   engineer
+                              </p>
+                              <a href="#" class="btn btn-primary">See Profile</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!-- container2 end -->
+
+
      <div class="container mt-5">
           <h2 class="text-center mb-4 fw-bold text-secondary">專欄推薦 & 分類展示</h2>
 
-          <div id="c1" class="row mb-4">
+          <!-- <div id="c1" class="row mb-4">
                <div class="col-12">
                     <div class="box box11">焦點推薦 11</div>
                </div>
-          </div>
+          </div> -->
 
           <div id="c2" class="row mb-4">
                <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -312,17 +412,7 @@
                </div>
           </div>
 
-          <div id="c3" class="row mb-4">
-               <div class="col-12 col-md-4 mb-3 mb-md-0">
-                    <div class="box box31">最新活動 31</div>
-               </div>
-               <div class="col-12 col-md-4 mb-3 mb-md-0">
-                    <div class="box box32">最新活動 32</div>
-               </div>
-               <div class="col-12 col-md-4">
-                    <div class="box box33">最新活動 33</div>
-               </div>
-          </div>
+
      </div>
 
 
@@ -332,7 +422,8 @@
 
                     <div class="modal-header bg-dark text-white rounded-top">
                          <h5 class="modal-title fw-bold" id="optometryModalLabel">👓 預約專業驗光服務</h5>
-                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                              aria-label="Close"></button>
                     </div>
 
                     <form action="#" method="POST">
@@ -341,12 +432,14 @@
 
                               <div class="mb-3">
                                    <label for="userName" class="form-label fw-bold text-secondary">驗光人本名：</label>
-                                   <input type="text" class="form-control" id="userName" placeholder="請輸入您的真實姓名" required>
+                                   <input type="text" class="form-control" id="userName" placeholder="請輸入您的真實姓名"
+                                        required>
                               </div>
 
                               <div class="mb-3">
                                    <label for="userPhone" class="form-label fw-bold text-secondary">聯絡電話：</label>
-                                   <input type="tel" class="form-control" id="userPhone" placeholder="例如：0912345678" required>
+                                   <input type="tel" class="form-control" id="userPhone" placeholder="例如：0912345678"
+                                        required>
                               </div>
 
                               <div class="row">
@@ -368,7 +461,8 @@
 
                               <div class="mb-2">
                                    <label for="userMsg" class="form-label fw-bold text-secondary">備註 / 特殊視力需求</label>
-                                   <textarea class="form-control" id="userMsg" rows="3" placeholder="例如：想看某特定品牌、有高度近視散光諮詢等..."></textarea>
+                                   <textarea class="form-control" id="userMsg" rows="3"
+                                        placeholder="例如：想看某特定品牌、有高度近視散光諮詢等..."></textarea>
                               </div>
                          </div>
 
@@ -386,6 +480,12 @@
 
      <!-- 🎯 頁尾整合優化：將原本散落的<a>標籤全部收納至<footer>中防止破圖與跑版 -->
      <footer class="footer-copy">
+          <p>禾米眼鏡門市資訊：
+          <p>地址：台北市萬華區萬大路327號1樓 || 電話：(02)2303-3698 </p>
+          <p>1 F., No. 327, Wanda Rd., Wanhua Dist., Taipei City 108053, Taiwan (R.O.C.)</p>
+
+
+          </p>
           <p>Copyright &copy; 2026 禾米眼鏡 版權所有</p>
           <div class="footer-links">
                <a href="#">隱私權政策</a>
@@ -395,6 +495,10 @@
                <a href="#">網站地圖</a>
           </div>
      </footer>
+
+     <!-- footer 彈跳出視窗 -->
+
+     <!-- footer 彈跳出視窗 -->
 
 </body>
 
